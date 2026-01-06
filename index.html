@@ -6,91 +6,91 @@
     <title>Calculator Impozite Locale Brașov 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+        .tab-active { background: #2563eb; color: white; }
+        .tab-inactive { background: #f3f4f6; color: #4b5563; }
+        .tab-inactive:hover { background: #e5e7eb; }
+        select, input[type="number"], input[type="text"] { appearance: none; -webkit-appearance: none; }
+        .autocomplete-items {
+            position: absolute; border: 1px solid #d4d4d4; border-top: none; z-index: 99;
+            top: 100%; left: 0; right: 0; max-height: 300px; overflow-y: auto;
+            background: white; border-radius: 0 0 8px 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-        .tab-active {
-            background: #2563eb;
-            color: white;
-        }
-        .tab-inactive {
-            background: #f3f4f6;
-            color: #4b5563;
-        }
-        .tab-inactive:hover {
-            background: #e5e7eb;
-        }
-        select, input[type="number"] {
-            appearance: none;
-            -webkit-appearance: none;
-        }
+        .autocomplete-items div { padding: 10px; cursor: pointer; border-bottom: 1px solid #f3f4f6; }
+        .autocomplete-items div:hover { background-color: #e5e7eb; }
+        .autocomplete-active { background-color: #2563eb !important; color: #ffffff; }
+        .zone-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 12px; }
+        .zone-A { background: #fef3c7; color: #92400e; }
+        .zone-B { background: #dbeafe; color: #1e40af; }
+        .zone-C { background: #d1fae5; color: #065f46; }
+        .zone-D { background: #e5e7eb; color: #374151; }
     </style>
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen p-4 md:p-8">
     <div class="max-w-4xl mx-auto" id="app">
-        <!-- Header -->
         <div class="bg-white rounded-2xl shadow-xl p-6 mb-6">
             <div class="flex items-center gap-4 mb-2">
-                <div class="w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center">
-                    <span class="text-3xl">🏛️</span>
-                </div>
+                <div class="w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center"><span class="text-3xl">🏛️</span></div>
                 <div>
-                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800">
-                        Calculator Impozite Locale Brașov
-                    </h1>
-                    <p class="text-gray-500">
-                        Conform HCL nr. 1142/22.12.2025 pentru anul fiscal 2026
-                    </p>
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Calculator Impozite Locale Brașov</h1>
+                    <p class="text-gray-500">Conform HCL nr. 1142/22.12.2025 pentru anul fiscal 2026</p>
                 </div>
             </div>
         </div>
 
-        <!-- Early Payment Toggle -->
         <div class="bg-white rounded-xl shadow-lg p-4 mb-6">
             <label class="flex items-center gap-3 cursor-pointer">
                 <input type="checkbox" id="earlyPayment" class="w-5 h-5 text-green-600 rounded focus:ring-green-500">
-                <span class="text-gray-700 font-medium">
-                    🎁 Plată anticipată până la 31 martie 2026 (bonificație 10% - Art. 27)
-                </span>
-                <span id="discountBadge" class="hidden bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
-                    -10% aplicat
-                </span>
+                <span class="text-gray-700 font-medium">🎁 Plată anticipată până la 31 martie 2026 (bonificație 10%)</span>
+                <span id="discountBadge" class="hidden bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">-10% aplicat</span>
             </label>
         </div>
 
-        <!-- Tabs -->
         <div class="flex gap-2 mb-0 flex-wrap">
-            <button onclick="showTab('cladiri')" id="tab-cladiri" class="tab-active flex items-center gap-2 px-6 py-3 font-medium rounded-t-lg transition-all">
-                <span>🏠</span> Clădiri
-            </button>
-            <button onclick="showTab('auto')" id="tab-auto" class="tab-inactive flex items-center gap-2 px-6 py-3 font-medium rounded-t-lg transition-all">
-                <span>🚗</span> Auto
-            </button>
-            <button onclick="showTab('teren')" id="tab-teren" class="tab-inactive flex items-center gap-2 px-6 py-3 font-medium rounded-t-lg transition-all">
-                <span>🌍</span> Teren
-            </button>
+            <button onclick="showTab('cladiri')" id="tab-cladiri" class="tab-active flex items-center gap-2 px-6 py-3 font-medium rounded-t-lg"><span>🏠</span> Clădiri</button>
+            <button onclick="showTab('auto')" id="tab-auto" class="tab-inactive flex items-center gap-2 px-6 py-3 font-medium rounded-t-lg"><span>🚗</span> Auto</button>
+            <button onclick="showTab('teren')" id="tab-teren" class="tab-inactive flex items-center gap-2 px-6 py-3 font-medium rounded-t-lg"><span>🌍</span> Teren</button>
         </div>
 
-        <!-- Tab Content -->
         <div class="bg-white rounded-b-2xl rounded-tr-2xl shadow-xl p-6">
-            
-            <!-- CLĂDIRI TAB -->
+            <!-- CLADIRI TAB -->
             <div id="content-cladiri" class="space-y-6">
-                <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
-                    🏠 Impozit pe Clădiri
-                </h2>
+                <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">🏠 Impozit pe Clădiri</h2>
+
+                <div class="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-4">
+                    <p class="font-bold text-green-800 mb-3">📍 Găsește zona fiscală după adresă (HCL 236/2015 rep. HCL 221/2016)</p>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="md:col-span-2 relative">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Caută strada</label>
+                            <input type="text" id="streetSearch" autocomplete="off" placeholder="Ex: Republicii, Lungă, Eroilor..." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                            <div id="streetAutocomplete" class="autocomplete-items hidden"></div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Număr (opțional)</label>
+                            <input type="number" id="streetNumber" oninput="checkStreetNumber()" placeholder="Nr." class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                        </div>
+                    </div>
+                    <div id="streetResult" class="mt-3 hidden">
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-green-700">✓ Strada:</span>
+                            <strong id="selectedStreet" class="text-green-800"></strong>
+                            <span id="zoneBadge" class="zone-badge"></span>
+                            <span id="streetNote" class="text-xs text-gray-500"></span>
+                        </div>
+                    </div>
+                </div>
                 
                 <div class="grid md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Tip proprietar</label>
-                        <select id="buildingOwnerType" onchange="calculateBuilding()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <select id="buildingOwnerType" onchange="calculateBuilding()" class="w-full p-3 border border-gray-300 rounded-lg">
                             <option value="fizica">Persoană fizică</option>
                             <option value="juridica">Persoană juridică</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Tip clădire</label>
-                        <select id="buildingType" onchange="calculateBuilding()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <select id="buildingType" onchange="calculateBuilding()" class="w-full p-3 border border-gray-300 rounded-lg">
                             <option value="residential">Rezidențială (locuință)</option>
                             <option value="nonResidential">Nerezidențială</option>
                         </select>
@@ -100,515 +100,1294 @@
                 <div class="grid md:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Material construcție</label>
-                        <select id="buildingMaterial" onchange="calculateBuilding()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <select id="buildingMaterial" onchange="calculateBuilding()" class="w-full p-3 border border-gray-300 rounded-lg">
                             <option value="beton">Beton armat / Cărămidă arsă</option>
                             <option value="piatra">Piatră / Cărămidă nearsă</option>
                             <option value="lemn">Lemn / Alte materiale</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Suprafața construită (m²)</label>
-                        <input type="number" id="buildingArea" oninput="calculateBuilding()" placeholder="Ex: 67" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Zona fiscală (Brașov - Rang I)</label>
+                        <select id="buildingZone" onchange="calculateBuilding()" class="w-full p-3 border border-gray-300 rounded-lg">
+                            <option value="A">Zona A - Centrală (coef. 2.60)</option>
+                            <option value="B">Zona B (coef. 2.50)</option>
+                            <option value="C">Zona C (coef. 2.40)</option>
+                            <option value="D">Zona D - Periferică (coef. 2.30)</option>
+                        </select>
                     </div>
                 </div>
 
-                <label class="flex items-center gap-3 cursor-pointer">
-                    <input type="checkbox" id="hasUtilities" checked onchange="calculateBuilding()" class="w-5 h-5 text-blue-600 rounded">
-                    <span class="text-gray-700">Cu utilități (apă, canal, electricitate, încălzire)</span>
-                </label>
-
-                <!-- Info Box -->
-                <div class="bg-blue-50 rounded-lg p-4 text-sm">
-                    <p class="font-semibold text-blue-800 mb-2">📋 Valori impozabile și cote (Anexa 1, Art. 2-3):</p>
-                    <table class="w-full text-blue-700 text-xs">
-                        <thead>
-                            <tr class="border-b border-blue-200">
-                                <th class="text-left py-1">Material</th>
-                                <th class="text-right py-1">Cu utilități</th>
-                                <th class="text-right py-1">Fără utilități</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Beton/Cărămidă arsă</td><td class="text-right">2.677 lei/mp</td><td class="text-right">1.606 lei/mp</td></tr>
-                            <tr><td>Piatră/Cărămidă nearsă</td><td class="text-right">803 lei/mp</td><td class="text-right">535 lei/mp</td></tr>
-                            <tr><td>Lemn/Alte materiale</td><td class="text-right">335 lei/mp</td><td class="text-right">201 lei/mp</td></tr>
-                        </tbody>
-                    </table>
-                    <p class="mt-2 text-blue-600">
-                        Cotă PF rezidențial: <strong>0,1%</strong> | PJ rezidențial: <strong>0,2%</strong> | PJ nerezidențial: <strong>1,3%</strong>
-                    </p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Vechimea clădirii</label>
+                        <select id="buildingAge" onchange="calculateBuilding()" class="w-full p-3 border border-gray-300 rounded-lg">
+                            <option value="sub30">Sub 30 ani (fără reducere)</option>
+                            <option value="30_50">30-50 ani (-10%)</option>
+                            <option value="50_100">50-100 ani (-30%)</option>
+                            <option value="peste100">Peste 100 ani (-50%)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Tip imobil</label>
+                        <select id="buildingBlockType" onchange="calculateBuilding()" class="w-full p-3 border border-gray-300 rounded-lg">
+                            <option value="casa">Casă individuală</option>
+                            <option value="bloc">Apartament în bloc (&gt;3 niv, &gt;8 ap) - coef. -0.10</option>
+                        </select>
+                    </div>
                 </div>
 
-                <!-- Result -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Valoarea impozabilă (RON)</label>
+                    <input type="number" id="buildingValue" oninput="calculateBuilding()" placeholder="Ex: 150000" class="w-full p-3 border border-gray-300 rounded-lg">
+                    <p class="text-xs text-gray-500 mt-1">PF: valoarea calculată conform Art. 457; PJ: valoarea din contabilitate</p>
+                </div>
+
                 <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl p-6 text-white">
-                    <div class="grid md:grid-cols-2 gap-4 mb-4 text-blue-100 text-sm">
-                        <div>
-                            <p>Valoare impozabilă:</p>
-                            <p id="buildingBaseValue" class="text-white font-semibold">0,00 RON</p>
-                        </div>
-                        <div>
-                            <p>Cotă impozitare:</p>
-                            <p id="buildingRate" class="text-white font-semibold">0,1%</p>
-                        </div>
+                    <div class="grid md:grid-cols-4 gap-4 mb-4 text-blue-100 text-sm">
+                        <div><p>Cotă impozit:</p><p id="buildingRateDisplay" class="text-white font-semibold">0.1%</p></div>
+                        <div><p>Coef. zonă:</p><p id="buildingZoneCoefDisplay" class="text-white font-semibold">2.60</p></div>
+                        <div><p>Reducere vechime:</p><p id="buildingAgeDisplay" class="text-white font-semibold">0%</p></div>
+                        <div><p>Bonificație:</p><p id="buildingDiscountDisplay" class="text-white font-semibold">0%</p></div>
                     </div>
                     <div class="border-t border-blue-400 pt-4">
                         <p class="text-blue-100 mb-1">Impozit anual clădire:</p>
                         <p id="buildingTax" class="text-4xl font-bold">0,00 RON</p>
-                        <p id="buildingDiscount" class="hidden text-blue-200 text-sm mt-2">✓ Include reducerea de 10% pentru plată anticipată</p>
+                        <p id="buildingDiscount" class="hidden text-blue-200 text-sm mt-2">✓ Include reducerea de 10%</p>
                     </div>
                 </div>
             </div>
 
             <!-- AUTO TAB -->
             <div id="content-auto" class="hidden space-y-6">
-                <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
-                    🚗 Impozit pe Mijloace de Transport
-                </h2>
-
-                <div id="pollutionWarning" class="bg-red-50 border border-red-200 rounded-lg p-4 text-sm text-red-800">
-                    <p class="font-bold">⚠️ Important - Cote adiționale Brașov (Art. 7)</p>
-                    <p class="mt-1">Primăria Brașov aplică cote adiționale <strong>ATÂT pentru persoane fizice CÂT și pentru persoane juridice</strong>, în funcție de norma de poluare!</p>
+                <h2 class="text-xl font-bold text-gray-800">🚗 Impozit pe Mijloace de Transport</h2>
+                <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-sm text-red-800">
+                    <p class="font-bold">⚠️ Cote adiționale Brașov (Art. 7)</p>
+                    <p>Se aplică TUTUROR (PF și PJ) în funcție de norma de poluare!</p>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Tip proprietar</label>
-                        <select id="vehicleOwnerType" onchange="calculateVehicle()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                            <option value="fizica">Persoană fizică</option>
-                            <option value="juridica">Persoană juridică</option>
-                        </select>
-                    </div>
-                    <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Tip vehicul</label>
-                        <select id="vehicleType" onchange="onVehicleTypeChange()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                            <optgroup label="Vehicule cu motor">
-                                <option value="autoturism">Autoturism</option>
-                                <option value="motocicleta">Motocicletă / ATV / Triciclu</option>
-                                <option value="autoutilitara">Autoutilitară / Camionetă (&lt;12t)</option>
-                                <option value="microbuz">Microbuz / Autobuz</option>
-                            </optgroup>
-                            <optgroup label="Autorulote și vehicule speciale">
-                                <option value="autorulota_m1">🚐 Autorulotă (omologată M1)</option>
-                                <option value="vehicul_special">🚛 Autovehicul special (&lt;12t)</option>
-                                <option value="rulota_tractata">🏕️ Rulotă tractată (fără motor)</option>
-                            </optgroup>
+                        <select id="vehicleType" onchange="onVehicleTypeChange()" class="w-full p-3 border border-gray-300 rounded-lg">
+                            <option value="autoturism">Autoturism</option>
+                            <option value="motocicleta">Motocicletă / ATV</option>
+                            <option value="autoutilitara">Autoutilitară (&lt;12t)</option>
+                            <option value="autorulota_m1">🚐 Autorulotă M1</option>
+                            <option value="rulota_tractata">🏕️ Rulotă tractată</option>
                         </select>
                     </div>
-                </div>
-
-                <!-- Engine capacity section (for motorized vehicles) -->
-                <div id="engineSection" class="grid md:grid-cols-2 gap-4">
-                    <div>
+                    <div id="engineCapacityDiv">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Capacitate cilindrică (cm³)</label>
-                        <input type="number" id="engineCapacity" oninput="calculateVehicle()" placeholder="Ex: 2300" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Normă de poluare</label>
-                        <select id="pollutionNorm" onchange="calculateVehicle()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                            <option value="noneuro">Non-euro / Euro 0-3 (+100%)</option>
-                            <option value="euro4">Euro 4 (+100%)</option>
-                            <option value="euro5" selected>Euro 5 (+75%)</option>
-                            <option value="euro6">Euro 6 (+35%)</option>
-                            <option value="hybrid">Hibrid (+5%)</option>
-                        </select>
+                        <input type="number" id="engineCapacity" oninput="calculateVehicle()" placeholder="Ex: 2300" class="w-full p-3 border border-gray-300 rounded-lg">
                     </div>
                 </div>
 
-                <!-- Trailer mass section (for trailers) -->
+                <div id="pollutionDiv">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Normă de poluare</label>
+                    <select id="pollutionNorm" onchange="calculateVehicle()" class="w-full p-3 border border-gray-300 rounded-lg">
+                        <option value="noneuro">Non-euro / Euro 0-3 (+100%)</option>
+                        <option value="euro4">Euro 4 (+100%)</option>
+                        <option value="euro5" selected>Euro 5 (+75%)</option>
+                        <option value="euro6">Euro 6 (+35%)</option>
+                        <option value="hybrid">Hibrid (+5%)</option>
+                    </select>
+                </div>
+
                 <div id="trailerSection" class="hidden">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Masa totală maximă autorizată</label>
-                    <select id="trailerMass" onchange="calculateVehicle()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Masa totală autorizată</label>
+                    <select id="trailerMass" onchange="calculateVehicle()" class="w-full p-3 border border-gray-300 rounded-lg">
                         <option value="sub1t">până la 1 tonă (14,16 lei)</option>
                         <option value="1t_5t">1 - 5 tone (53,51 lei)</option>
                         <option value="5t_10t">5 - 10 tone (81,83 lei)</option>
                         <option value="peste10t">peste 10 tone (100,73 lei)</option>
                     </select>
-                    <div class="mt-3 bg-green-50 border border-green-200 rounded-lg p-3 text-sm text-green-800">
-                        <p class="font-medium">✓ Rulotele tractate au impozit fix pe masă</p>
-                        <p class="text-green-600 mt-1">Nu se aplică cote adiționale de poluare (Art. 470 alin. 7)</p>
-                    </div>
                 </div>
 
-                <!-- Info boxes for special vehicles -->
-                <div id="autorulotaInfo" class="hidden bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800">
-                    <p class="font-bold">🚐 Autorulotă omologată M1</p>
-                    <p class="mt-1">Autorulotele omologate ca <strong>autoturism (categoria M1)</strong> se impozitează identic cu autoturismele.</p>
-                </div>
-
-                <div id="vehiculSpecialInfo" class="hidden bg-purple-50 border border-purple-200 rounded-lg p-4 text-sm text-purple-800">
-                    <p class="font-bold">🚛 Autovehicul special</p>
-                    <p class="mt-1">Autovehiculele speciale sub 12 tone se încadrează la "Alte vehicule cu tracțiune mecanică".</p>
-                </div>
-
-                <!-- Additional rates info -->
-                <div id="additionalRatesInfo" class="bg-orange-50 rounded-lg p-4 text-sm">
-                    <p class="font-semibold text-orange-800 mb-2">📋 Cote adiționale Brașov - Art. 7 (se aplică tuturor!):</p>
-                    <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-orange-700">
-                        <div id="rate-noneuro" class="p-2 rounded text-center bg-white">
-                            <p class="font-medium text-xs">Non-euro/E0-E3</p>
-                            <p class="text-lg font-bold text-red-600">+100%</p>
-                        </div>
-                        <div id="rate-euro4" class="p-2 rounded text-center bg-white">
-                            <p class="font-medium text-xs">Euro 4</p>
-                            <p class="text-lg font-bold text-red-600">+100%</p>
-                        </div>
-                        <div id="rate-euro5" class="p-2 rounded text-center bg-orange-200 ring-2 ring-orange-400">
-                            <p class="font-medium text-xs">Euro 5</p>
-                            <p class="text-lg font-bold text-orange-600">+75%</p>
-                        </div>
-                        <div id="rate-euro6" class="p-2 rounded text-center bg-white">
-                            <p class="font-medium text-xs">Euro 6</p>
-                            <p class="text-lg font-bold text-yellow-600">+35%</p>
-                        </div>
-                        <div id="rate-hybrid" class="p-2 rounded text-center bg-white">
-                            <p class="font-medium text-xs">Hibrid</p>
-                            <p class="text-lg font-bold text-green-600">+5%</p>
-                        </div>
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl p-6 text-white">
+                    <div class="grid md:grid-cols-3 gap-4 mb-4 text-blue-100 text-sm">
+                        <div><p>Impozit de bază:</p><p id="vehicleBaseDisplay" class="text-white font-semibold">0 RON</p></div>
+                        <div><p>Cotă adițională:</p><p id="vehicleSurchargeDisplay" class="text-white font-semibold">+0%</p></div>
+                        <div><p>Bonificație:</p><p id="vehicleDiscountDisplay" class="text-white font-semibold">0%</p></div>
                     </div>
-                </div>
-
-                <!-- Calculation details -->
-                <div id="vehicleDetails" class="hidden bg-gray-50 rounded-lg p-4 text-sm">
-                    <p class="font-semibold text-gray-800 mb-2">📊 Detalii calcul:</p>
-                    <div class="grid md:grid-cols-2 gap-2 text-gray-600">
-                        <p>Fracțiuni de 200 cm³: <strong id="vehicleUnits">0</strong></p>
-                        <p>Tarif bază/200cm³: <strong id="vehicleBaseRate">0 lei</strong></p>
-                        <p>Impozit bază (național indexat): <strong id="vehicleBaseTax">0 RON</strong></p>
-                        <p>Cotă adițională Brașov: <strong id="vehicleAdditionalTax">0 RON</strong></p>
-                    </div>
-                </div>
-
-                <!-- Result -->
-                <div id="vehicleResult" class="bg-gradient-to-r from-orange-500 to-red-500 rounded-xl p-6 text-white">
-                    <div id="vehicleBreakdown" class="grid md:grid-cols-3 gap-4 mb-4 text-orange-100 text-sm">
-                        <div>
-                            <p>Impozit bază:</p>
-                            <p id="resultBaseTax" class="text-white font-semibold">0,00 RON</p>
-                        </div>
-                        <div>
-                            <p>Majorare Brașov (<span id="resultAdditionalPercent">0</span>%):</p>
-                            <p id="resultAdditionalTax" class="text-white font-semibold">0,00 RON</p>
-                        </div>
-                        <div>
-                            <p>Subtotal:</p>
-                            <p id="resultSubtotal" class="text-white font-semibold">0,00 RON</p>
-                        </div>
-                    </div>
-                    <div id="trailerInfo" class="hidden mb-4 text-teal-100 text-sm">
-                        <p>Tip: <strong class="text-white">Rulotă tractată (Art. 470 alin. 7)</strong></p>
-                        <p>Impozit fix pe masă, fără majorări de poluare</p>
-                    </div>
-                    <div class="border-t border-orange-300 pt-4">
-                        <p class="text-orange-100 mb-1">Impozit anual vehicul:</p>
+                    <div class="border-t border-blue-400 pt-4">
+                        <p class="text-blue-100 mb-1">Impozit anual vehicul:</p>
                         <p id="vehicleTax" class="text-4xl font-bold">0,00 RON</p>
-                        <p id="vehicleDiscount" class="hidden text-orange-200 text-sm mt-2">✓ Include reducerea de 10% pentru plată anticipată</p>
+                        <p id="vehicleDiscount" class="hidden text-blue-200 text-sm mt-2">✓ Include reducerea de 10%</p>
                     </div>
                 </div>
             </div>
 
             <!-- TEREN TAB -->
             <div id="content-teren" class="hidden space-y-6">
-                <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">
-                    🌍 Impozit pe Teren
-                </h2>
+                <h2 class="text-xl font-bold text-gray-800">🌍 Impozit pe Teren</h2>
+                
+                <div class="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-4">
+                    <p class="font-bold text-green-800 mb-3">📍 Găsește zona fiscală</p>
+                    <div class="relative">
+                        <input type="text" id="landStreetSearch" autocomplete="off" placeholder="Caută strada..." class="w-full p-3 border border-gray-300 rounded-lg">
+                        <div id="landStreetAutocomplete" class="autocomplete-items hidden"></div>
+                    </div>
+                    <div id="landStreetResult" class="mt-3 hidden">
+                        <span class="text-green-700">✓</span> <strong id="landSelectedStreet"></strong>
+                        <span id="landZoneBadge" class="zone-badge ml-2"></span>
+                    </div>
+                </div>
 
                 <div class="grid md:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Categoria de folosință</label>
-                        <select id="landCategory" onchange="calculateLand()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                            <optgroup label="Intravilan">
-                                <option value="intravilan_constructii">Teren cu construcții</option>
-                                <option value="intravilan_arabil">Teren arabil</option>
-                                <option value="intravilan_pasune">Pășune</option>
-                                <option value="intravilan_faneata">Fâneață</option>
-                                <option value="intravilan_vie">Vie</option>
-                                <option value="intravilan_livada">Livadă</option>
-                            </optgroup>
-                            <optgroup label="Extravilan">
-                                <option value="extravilan_arabil">Teren arabil</option>
-                                <option value="extravilan_pasune">Pășune</option>
-                                <option value="extravilan_faneata">Fâneață</option>
-                            </optgroup>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Categorie teren</label>
+                        <select id="landCategory" onchange="calculateLand()" class="w-full p-3 border border-gray-300 rounded-lg">
+                            <option value="intravilan_constructii">Intravilan - construcții</option>
+                            <option value="intravilan_arabil">Intravilan - arabil</option>
+                            <option value="extravilan_arabil">Extravilan - arabil</option>
+                            <option value="extravilan_pasune">Extravilan - pășune</option>
                         </select>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Zona fiscală</label>
-                        <select id="landZone" onchange="calculateLand()" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
-                            <option value="A">Zona A (centrală)</option>
+                        <select id="landZone" onchange="calculateLand()" class="w-full p-3 border border-gray-300 rounded-lg">
+                            <option value="A">Zona A</option>
                             <option value="B">Zona B</option>
                             <option value="C">Zona C</option>
-                            <option value="D">Zona D (periferică)</option>
+                            <option value="D">Zona D</option>
                         </select>
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Suprafața terenului (m²)</label>
-                    <input type="number" id="landArea" oninput="calculateLand()" placeholder="Ex: 500" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Suprafața (m²)</label>
+                    <input type="number" id="landArea" oninput="calculateLand()" placeholder="Ex: 500" class="w-full p-3 border border-gray-300 rounded-lg">
                 </div>
 
-                <div class="bg-green-50 rounded-lg p-4 text-sm">
-                    <p class="font-semibold text-green-800 mb-2">📋 Informații zonare (HCL 236/2015):</p>
-                    <p class="text-green-700">Verificați zona fiscală a terenului la Direcția Fiscală Brașov sau pe platforma brasovcity.</p>
-                    <p id="landRateInfo" class="mt-2 text-green-800 hidden">Tarif aplicat: <strong id="landRateValue">0 lei/ha</strong></p>
-                </div>
-
-                <!-- Result -->
-                <div class="bg-gradient-to-r from-green-500 to-teal-500 rounded-xl p-6 text-white">
-                    <p class="text-green-100 mb-1">Impozit anual teren:</p>
-                    <p id="landTax" class="text-4xl font-bold">0,00 RON</p>
-                    <p id="landDiscount" class="hidden text-green-200 text-sm mt-2">✓ Include reducerea de 10% pentru plată anticipată</p>
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-xl p-6 text-white">
+                    <div class="grid md:grid-cols-3 gap-4 mb-4 text-blue-100 text-sm">
+                        <div><p>Suprafața:</p><p id="landAreaDisplay" class="text-white font-semibold">0 m²</p></div>
+                        <div><p>Tarif/ha:</p><p id="landRateDisplay" class="text-white font-semibold">0 lei</p></div>
+                        <div><p>Bonificație:</p><p id="landDiscountDisplay" class="text-white font-semibold">0%</p></div>
+                    </div>
+                    <div class="border-t border-blue-400 pt-4">
+                        <p class="text-blue-100 mb-1">Impozit anual teren:</p>
+                        <p id="landTax" class="text-4xl font-bold">0,00 RON</p>
+                        <p id="landDiscountNote" class="hidden text-blue-200 text-sm mt-2">✓ Include reducerea de 10%</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Footer -->
-        <div class="mt-6 bg-white rounded-xl shadow-lg p-6">
-            <h3 class="font-bold text-gray-800 mb-3">📅 Termene de plată 2026</h3>
-            <div class="grid md:grid-cols-3 gap-4 text-sm text-gray-600">
-                <div class="bg-green-50 p-3 rounded-lg">
-                    <p class="font-medium text-green-800">🎁 Plată integrală cu bonificație:</p>
-                    <p class="text-lg font-bold text-green-600">până la 31 martie 2026</p>
-                    <p class="text-xs">Beneficiezi de 10% reducere</p>
-                </div>
-                <div class="bg-gray-50 p-3 rounded-lg">
-                    <p class="font-medium text-gray-800">Prima rată:</p>
-                    <p class="text-lg font-bold">31 martie 2026</p>
-                </div>
-                <div class="bg-gray-50 p-3 rounded-lg">
-                    <p class="font-medium text-gray-800">A doua rată:</p>
-                    <p class="text-lg font-bold">30 septembrie 2026</p>
-                </div>
-            </div>
-            <div class="mt-4 pt-4 border-t border-gray-200">
-                <p class="text-xs text-gray-500">⚠️ Calculator orientativ bazat pe HCL 1142/2025. Pentru calcule oficiale consultați:</p>
-                <p class="text-xs text-gray-600 mt-1"><strong>Direcția Fiscală Brașov</strong> - str. Dorobanților nr. 4 | Tel: +40-268-405000 | Email: dirfiscala@dfbv.ro</p>
-            </div>
-            <p class="text-xs text-gray-400 mt-2">Sursa: HCL nr. 1142/22.12.2025 - Consiliul Local al Municipiului Brașov</p>
+        <div class="mt-6 text-center text-gray-500 text-sm">
+            <p>Calculator informativ - HCL 1142/2025 + HCL 236/2015 rep. HCL 221/2016 (zonare)</p>
+            <p>© 2026 Pentru calcule oficiale consultați Direcția Fiscală Brașov</p>
         </div>
     </div>
 
-    <script>
-        // Data
-        const buildingValues = {
-            beton: { withUtilities: 2677, withoutUtilities: 1606 },
-            piatra: { withUtilities: 803, withoutUtilities: 535 },
-            lemn: { withUtilities: 335, withoutUtilities: 201 }
-        };
+<script>
+// =====================================================
+// NOMENCLATOR STRĂZI BRAȘOV - HCL 236/2015 rep. HCL 221/2016
+// Extras din Anexa la HCL - Zonarea Municipiului Brașov
+// =====================================================
+const streetData = [
+    // 1 Decembrie 1918 - zone multiple
+    { name: "1 Decembrie 1918", zone: "C", note: "nr.1-19, nr.2-18" },
+    { name: "1 Decembrie 1918", zone: "D", note: "de la nr.21/20 la final" },
+    { name: "1 Mai", zone: "B", note: "" },
+    { name: "11 Iunie 1848", zone: "C", note: "" },
+    { name: "13 Decembrie", zone: "B", note: "nr.1-59, nr.2-82" },
+    { name: "13 Decembrie", zone: "C", note: "de la nr.61/84 la final" },
+    { name: "15 Noiembrie", zone: "A", note: "" },
+    { name: "8 Martie", zone: "C", note: "" },
+    { name: "9 Mai", zone: "B", note: "" },
+    { name: "Abatorului", zone: "D", note: "" },
+    { name: "Abrud", zone: "C", note: "" },
+    { name: "Adrian Păunescu", zone: "D", note: "" },
+    { name: "Afinelor", zone: "D", note: "" },
+    { name: "Agricultorilor", zone: "D", note: "" },
+    { name: "Agrișelor", zone: "A", note: "" },
+    { name: "Albatrosului", zone: "C", note: "" },
+    { name: "Albă", zone: "C", note: "" },
+    { name: "Albăstrelelor", zone: "C", note: "" },
+    { name: "Albinelor", zone: "D", note: "" },
+    { name: "Alecu Russo", zone: "A", note: "" },
+    { name: "Alexandru cel Bun", zone: "B", note: "" },
+    { name: "Alexandru Ciurcu", zone: "D", note: "" },
+    { name: "Alexandru Flechtenmaher", zone: "D", note: "" },
+    { name: "Alexandru Ioan Cuza", zone: "B", note: "" },
+    { name: "Alexandru Ion Lapedatu", zone: "D", note: "" },
+    { name: "Alexandru Odobescu", zone: "B", note: "" },
+    { name: "Alexandru Papiu Ilarian", zone: "B", note: "" },
+    { name: "Alexandru Sahia", zone: "B", note: "" },
+    { name: "Alexandru Vlahuță", zone: "B", note: "" },
+    { name: "Aluminiului", zone: "C", note: "nr.1-7, nr.2-4" },
+    { name: "Aluminiului", zone: "D", note: "de la nr.9/6 la final" },
+    { name: "Aluniș", zone: "B", note: "" },
+    { name: "Alunului", zone: "D", note: "" },
+    { name: "Amurgului", zone: "C", note: "" },
+    { name: "Ana Ipătescu", zone: "A", note: "" },
+    { name: "Andreas Clemens", zone: "D", note: "" },
+    { name: "Andrei Bârseanu", zone: "D", note: "" },
+    { name: "Anghel Saligny", zone: "C", note: "" },
+    { name: "Aninoasa", zone: "B", note: "" },
+    { name: "Anton Pann", zone: "D", note: "" },
+    { name: "Apicultorilor", zone: "D", note: "" },
+    { name: "Apollo", zone: "C", note: "" },
+    { name: "Apollonia Hirscher", zone: "A", note: "" },
+    { name: "Aprily Lajos", zone: "D", note: "" },
+    { name: "Apulum", zone: "A", note: "" },
+    { name: "Ardealului", zone: "D", note: "" },
+    { name: "Argintului", zone: "C", note: "nr.1-3, nr.2-4" },
+    { name: "Argintului", zone: "D", note: "de la nr.5/6 la final" },
+    { name: "Arinului", zone: "B", note: "" },
+    { name: "Armoniei", zone: "B", note: "" },
+    { name: "Aron Pumnul", zone: "D", note: "" },
+    { name: "Artur Leiter", zone: "D", note: "" },
+    { name: "Artarului", zone: "B", note: "" },
+    { name: "Astra", zone: "C", note: "" },
+    { name: "Augustin Benea", zone: "D", note: "" },
+    { name: "Augustin Bunea", zone: "C", note: "" },
+    { name: "Augustin Tătaru", zone: "D", note: "" },
+    { name: "Aurel Ciortea", zone: "D", note: "" },
+    { name: "Aurel Marin", zone: "C", note: "" },
+    { name: "Aurel Vlaicu", zone: "B", note: "" },
+    { name: "Aurelian", zone: "B", note: "" },
+    { name: "Aurora", zone: "B", note: "" },
+    { name: "Automotoarelor", zone: "C", note: "" },
+    { name: "Avram Iancu", zone: "B", note: "nr.1-69, nr.2-56" },
+    { name: "Avram Iancu", zone: "C", note: "de la nr.71/58 la final" },
+    { name: "Axente Banciu", zone: "D", note: "" },
+    { name: "Baba Novac", zone: "B", note: "" },
+    { name: "Baciului", zone: "D", note: "" },
+    { name: "Baiului", zone: "D", note: "" },
+    { name: "Bâlea", zone: "C", note: "" },
+    { name: "Banatului", zone: "B", note: "" },
+    { name: "Barbu Lăutaru", zone: "C", note: "" },
+    { name: "Barbu Ștefănescu Delavrancea", zone: "B", note: "" },
+    { name: "Bârsa Repede", zone: "D", note: "" },
+    { name: "Bârsei", zone: "D", note: "" },
+    { name: "Basarabia", zone: "B", note: "" },
+    { name: "Bazaltului", zone: "C", note: "" },
+    { name: "Băilor", zone: "B", note: "" },
+    { name: "Berzei", zone: "C", note: "" },
+    { name: "Bihorului", zone: "B", note: "" },
+    { name: "Bisericii Române", zone: "B", note: "" },
+    { name: "Bisericii Sf. Nicolae", zone: "C", note: "" },
+    { name: "Bobâlna", zone: "C", note: "" },
+    { name: "Bobului", zone: "D", note: "" },
+    { name: "Bogdan Alexandru", zone: "C", note: "" },
+    { name: "Bogdan Petriceicu Hașdeu", zone: "B", note: "" },
+    { name: "Bogdan Vodă", zone: "D", note: "" },
+    { name: "Borzești", zone: "D", note: "" },
+    { name: "Brândușelor", zone: "B", note: "nr.1-13, nr.2-76" },
+    { name: "Brândușelor", zone: "C", note: "de la nr.15/78 la final" },
+    { name: "Brazilor", zone: "C", note: "de la nr.31/56 la final" },
+    { name: "Brazilor", zone: "D", note: "nr.1-29, nr.2-54" },
+    { name: "Brazilor (Fundătura)", zone: "D", note: "" },
+    { name: "Bressan", zone: "D", note: "" },
+    { name: "Bronzului", zone: "C", note: "" },
+    { name: "Bucegi", zone: "D", note: "" },
+    { name: "Buciumului", zone: "D", note: "" },
+    { name: "București", zone: "B", note: "nr.1-101, nr.2-106" },
+    { name: "București", zone: "C", note: "de la nr.101A/108 la final" },
+    { name: "Bujorului", zone: "C", note: "" },
+    { name: "Busuiocului", zone: "C", note: "" },
+    { name: "Buștenilor", zone: "D", note: "" },
+    { name: "Buzești", zone: "D", note: "" },
+    { name: "Caisului", zone: "C", note: "" },
+    { name: "Calcarului", zone: "B", note: "" },
+    { name: "Cameliei", zone: "D", note: "" },
+    { name: "Camil Petrescu", zone: "D", note: "" },
+    { name: "Căliman", zone: "D", note: "" },
+    { name: "Cătinei", zone: "D", note: "" },
+    { name: "Câmpul cu Flori", zone: "D", note: "" },
+    { name: "Câmpului", zone: "C", note: "" },
+    { name: "Candid Muslea", zone: "D", note: "" },
+    { name: "Cânepii", zone: "D", note: "" },
+    { name: "Capra Neagră", zone: "D", note: "" },
+    { name: "Caraiman", zone: "B", note: "" },
+    { name: "Carelor (Aleea)", zone: "D", note: "" },
+    { name: "Carierei", zone: "C", note: "" },
+    { name: "Carierei (Fundătura)", zone: "C", note: "" },
+    { name: "Carpați", zone: "B", note: "nr.1-59, nr.2-56" },
+    { name: "Carpați", zone: "C", note: "de la nr.59A/58 la final" },
+    { name: "Carpenului", zone: "B", note: "" },
+    { name: "Cascadei", zone: "D", note: "" },
+    { name: "Castanilor", zone: "A", note: "" },
+    { name: "Castelului", zone: "A", note: "" },
+    { name: "Castelului (Suișul)", zone: "A", note: "" },
+    { name: "Cavalului", zone: "D", note: "" },
+    { name: "Călugăreni", zone: "C", note: "" },
+    { name: "Căpitan Ilie Birt", zone: "C", note: "" },
+    { name: "Căprioarei", zone: "C", note: "" },
+    { name: "Cărămidăriei", zone: "C", note: "" },
+    { name: "Ceahlău", zone: "C", note: "nr.1-29, de la nr.2 la final" },
+    { name: "Ceahlău", zone: "D", note: "de la nr.31 la final" },
+    { name: "Cedrilor", zone: "D", note: "" },
+    { name: "Ceferiștilor", zone: "C", note: "" },
+    { name: "Cerbului", zone: "A", note: "" },
+    { name: "Cercelușului", zone: "D", note: "" },
+    { name: "Cernatului (Drumul)", zone: "C", note: "" },
+    { name: "Cernei", zone: "B", note: "" },
+    { name: "Cetățuia", zone: "B", note: "" },
+    { name: "Cetinii", zone: "C", note: "nr.1-25, nr.2-44" },
+    { name: "Cetinii", zone: "D", note: "de la nr.27/46 la final" },
+    { name: "Cezar Bolliac", zone: "C", note: "" },
+    { name: "Christian Pomarius", zone: "D", note: "" },
+    { name: "Cibinului", zone: "B", note: "de la nr.2 la final, nr.1-23" },
+    { name: "Cibinului", zone: "D", note: "de la nr.25 la final" },
+    { name: "Ciceu", zone: "D", note: "" },
+    { name: "Cicoarei", zone: "C", note: "" },
+    { name: "Cimpoiului", zone: "D", note: "" },
+    { name: "Cincinat Pavelescu", zone: "B", note: "" },
+    { name: "Ciobanului", zone: "D", note: "" },
+    { name: "Clocanului", zone: "C", note: "" },
+    { name: "Ciocârliei", zone: "C", note: "" },
+    { name: "Cioplea (Aleea)", zone: "D", note: "" },
+    { name: "Ciprian Porumbescu", zone: "B", note: "" },
+    { name: "Cireșului", zone: "D", note: "" },
+    { name: "Clăbucet", zone: "C", note: "" },
+    { name: "Cloșca", zone: "B", note: "" },
+    { name: "Coastei", zone: "C", note: "" },
+    { name: "Cocorului", zone: "C", note: "" },
+    { name: "Codrul Cosminului", zone: "C", note: "" },
+    { name: "Col. Ion Buzoianu", zone: "B", note: "" },
+    { name: "Colinei", zone: "B", note: "" },
+    { name: "Colonia Metrom", zone: "C", note: "" },
+    { name: "Colțul Putinarilor", zone: "C", note: "nr.1-25, nr.2-20" },
+    { name: "Colțul Putinarilor", zone: "D", note: "de la nr.27/22 la final" },
+    { name: "Cometei", zone: "C", note: "" },
+    { name: "Consiliul Europei (Piața)", zone: "A", note: "" },
+    { name: "Constantin Brâncoveanu", zone: "B", note: "" },
+    { name: "Constantin Dobrogeanu Gherea", zone: "B", note: "" },
+    { name: "Constantin Gheorghe Nica", zone: "D", note: "" },
+    { name: "Constantin Lacea", zone: "B", note: "" },
+    { name: "Constantin Lecca", zone: "D", note: "" },
+    { name: "Constelației (Aleea)", zone: "C", note: "" },
+    { name: "Constructorilor (Aleea)", zone: "C", note: "" },
+    { name: "Corniței (Aleea)", zone: "D", note: "" },
+    { name: "Coroniței", zone: "D", note: "" },
+    { name: "Cosmești", zone: "D", note: "" },
+    { name: "Cosmos", zone: "C", note: "" },
+    { name: "Costilei", zone: "C", note: "" },
+    { name: "Coștila", zone: "D", note: "" },
+    { name: "Cotun", zone: "C", note: "" },
+    { name: "Cozia", zone: "D", note: "" },
+    { name: "Craiului", zone: "D", note: "" },
+    { name: "Crângului", zone: "D", note: "" },
+    { name: "Crăițelor (Aleea)", zone: "D", note: "" },
+    { name: "Crinului", zone: "C", note: "" },
+    { name: "Cristianului (Șoseaua)", zone: "C", note: "" },
+    { name: "Crișan", zone: "B", note: "" },
+    { name: "Crișana", zone: "B", note: "" },
+    { name: "Crișului", zone: "B", note: "" },
+    { name: "Crizantemelor", zone: "D", note: "" },
+    { name: "Cronicar Ion Neculce", zone: "C", note: "" },
+    { name: "Cucului", zone: "C", note: "" },
+    { name: "Curcanilor", zone: "C", note: "" },
+    { name: "Curmăturii", zone: "D", note: "" },
+    { name: "Dacia", zone: "C", note: "" },
+    { name: "Daniel Fronius", zone: "D", note: "" },
+    { name: "Dascălu Costea", zone: "D", note: "" },
+    { name: "David Corbea", zone: "D", note: "" },
+    { name: "De Mijloc", zone: "B", note: "nr.1-63, nr.2-58" },
+    { name: "De Mijloc", zone: "C", note: "de la nr.65/60 la final" },
+    { name: "Dealul Capelei", zone: "D", note: "" },
+    { name: "Dealul Cetății", zone: "B", note: "" },
+    { name: "Dealul de Jos", zone: "B", note: "" },
+    { name: "Dealul Melcilor", zone: "B", note: "" },
+    { name: "Dealul Morii", zone: "B", note: "" },
+    { name: "Dealul Spirii", zone: "C", note: "nr.1-33, nr.2-24" },
+    { name: "Dealul Spirii", zone: "D", note: "de la nr.35/26 la final" },
+    { name: "Dealul Spirii (Aleea)", zone: "D", note: "" },
+    { name: "Dealul Straja", zone: "D", note: "" },
+    { name: "Decebal", zone: "B", note: "" },
+    { name: "Deda", zone: "D", note: "" },
+    { name: "Defileului", zone: "D", note: "" },
+    { name: "Democrației", zone: "C", note: "" },
+    { name: "Diaconu Coresi", zone: "A", note: "" },
+    { name: "Diana", zone: "B", note: "" },
+    { name: "Dihamului", zone: "D", note: "" },
+    { name: "Dimineții", zone: "B", note: "" },
+    { name: "Dimitrie Anghel", zone: "D", note: "" },
+    { name: "Dimitrie Cantemir", zone: "B", note: "" },
+    { name: "Dobrogea", zone: "B", note: "" },
+    { name: "Doinașului", zone: "B", note: "" },
+    { name: "Doinei", zone: "B", note: "" },
+    { name: "Domniței (Aleea)", zone: "D", note: "" },
+    { name: "Dornei", zone: "D", note: "" },
+    { name: "Dorobanților", zone: "A", note: "nr.1-5, nr.2-4" },
+    { name: "Dorobanților", zone: "B", note: "de la nr.7/6 la final" },
+    { name: "Dorului", zone: "C", note: "" },
+    { name: "Dr. Alexandru Davilla", zone: "B", note: "" },
+    { name: "Dr. Gheorghe Baiulescu", zone: "B", note: "" },
+    { name: "Dr. Gheorghe Marinescu", zone: "B", note: "" },
+    { name: "Dr. Iacob Felix", zone: "B", note: "" },
+    { name: "Dr. Ioan Hozan", zone: "C", note: "" },
+    { name: "Dr. Ion Rațiu", zone: "D", note: "" },
+    { name: "Dr. Liviu Cîmpeanu", zone: "C", note: "" },
+    { name: "Dr. Toma Ionescu", zone: "B", note: "" },
+    { name: "Dr. Vasile Saftu", zone: "C", note: "" },
+    { name: "Dr. Victor Babeș", zone: "B", note: "" },
+    { name: "Dr. Ion Cantacuzino", zone: "B", note: "" },
+    { name: "Dragoș Vodă", zone: "D", note: "" },
+    { name: "Drezinei", zone: "C", note: "" },
+    { name: "Drumul Sulinar", zone: "A", note: "" },
+    { name: "Dudului", zone: "D", note: "" },
+    { name: "Dulgherului", zone: "D", note: "" },
+    { name: "Dumbrava Roșie", zone: "C", note: "" },
+    { name: "După Grădini", zone: "D", note: "" },
+    { name: "După Iniște", zone: "C", note: "nr.1-35, nr.2-58" },
+    { name: "După Iniște", zone: "D", note: "de la nr.37/60 la final" },
+    { name: "După Iniște (Aleea)", zone: "D", note: "" },
+    { name: "După Ziduri", zone: "A", note: "" },
+    { name: "Durău", zone: "D", note: "" },
+    { name: "Ecaterina Teodoroiu", zone: "D", note: "" },
+    { name: "Ecaterina Varga", zone: "B", note: "" },
+    { name: "Ederei", zone: "D", note: "" },
+    { name: "Eftimie Murgu", zone: "B", note: "" },
+    { name: "Egalității", zone: "C", note: "" },
+    { name: "Egretei", zone: "C", note: "" },
+    { name: "Emanoil Bernfeld", zone: "D", note: "" },
+    { name: "Emil Gârleanu", zone: "B", note: "" },
+    { name: "Emil Racoviță", zone: "B", note: "" },
+    { name: "Enupărului", zone: "B", note: "" },
+    { name: "Eroilor (Bulevardul)", zone: "A", note: "" },
+    { name: "Eugen Jebeleanu", zone: "D", note: "" },
+    { name: "Fabricii", zone: "B", note: "" },
+    { name: "Fagurului", zone: "D", note: "" },
+    { name: "Fânarului", zone: "D", note: "" },
+    { name: "Fanionului", zone: "C", note: "" },
+    { name: "Fântâna Roșie", zone: "B", note: "" },
+    { name: "Fântânii", zone: "D", note: "" },
+    { name: "Fântânița Călugărului", zone: "A", note: "" },
+    { name: "Fântânița cu Brad", zone: "A", note: "" },
+    { name: "Fântâniței", zone: "D", note: "" },
+    { name: "Fânului", zone: "D", note: "" },
+    { name: "Făgărașului (Calea)", zone: "C", note: "" },
+    { name: "Făgetului", zone: "B", note: "" },
+    { name: "Feldioarei (Calea)", zone: "D", note: "" },
+    { name: "Ferigii", zone: "C", note: "" },
+    { name: "Filiași", zone: "D", note: "" },
+    { name: "Filip Gheorghe", zone: "D", note: "" },
+    { name: "Florilor", zone: "C", note: "" },
+    { name: "Fluierașului", zone: "D", note: "" },
+    { name: "Fochiștilor", zone: "C", note: "" },
+    { name: "Fontei", zone: "D", note: "" },
+    { name: "Forței", zone: "C", note: "" },
+    { name: "Fragilor", zone: "B", note: "" },
+    { name: "Frasinului", zone: "D", note: "" },
+    { name: "Freziei", zone: "C", note: "" },
+    { name: "Fuiorului", zone: "D", note: "" },
+    { name: "Fundăturii", zone: "D", note: "" },
+    { name: "Furcii", zone: "A", note: "" },
+    { name: "Furnalelor", zone: "D", note: "" },
+    { name: "Galaxiei", zone: "C", note: "" },
+    { name: "Garoafelor", zone: "D", note: "" },
+    { name: "Garofiței", zone: "D", note: "" },
+    { name: "Gavril Munteanu", zone: "D", note: "" },
+    { name: "Gării (Bulevardul)", zone: "B", note: "" },
+    { name: "Gării Dârste", zone: "D", note: "" },
+    { name: "Gării Noua", zone: "D", note: "" },
+    { name: "George Bacovia", zone: "D", note: "" },
+    { name: "George Călinescu", zone: "D", note: "" },
+    { name: "George Coșbuc", zone: "A", note: "" },
+    { name: "George Enescu (Piața)", zone: "A", note: "" },
+    { name: "George Giuglea", zone: "D", note: "" },
+    { name: "George Moroianu", zone: "D", note: "" },
+    { name: "Gheorghe Barițiu", zone: "A", note: "" },
+    { name: "Gheorghe Dima (Șirul)", zone: "B", note: "" },
+    { name: "Gheorghe Doja", zone: "D", note: "" },
+    { name: "Gheorghe Dragoș", zone: "D", note: "" },
+    { name: "Gheorghe Lazăr", zone: "B", note: "" },
+    { name: "Gheorghe Sion", zone: "C", note: "" },
+    { name: "Gheorghe Șincai", zone: "A", note: "" },
+    { name: "Ghimbășelului", zone: "D", note: "" },
+    { name: "Ghindei", zone: "B", note: "" },
+    { name: "Ghiocelului", zone: "D", note: "" },
+    { name: "Gladiolelor", zone: "D", note: "" },
+    { name: "Gloriei", zone: "C", note: "" },
+    { name: "Gorunului", zone: "D", note: "" },
+    { name: "Gospodarilor", zone: "D", note: "" },
+    { name: "G-ral Dumitrache", zone: "C", note: "" },
+    { name: "G-ral Eremia Grigorescu", zone: "B", note: "" },
+    { name: "G-ral Leonard Mociulschi", zone: "C", note: "" },
+    { name: "G-ral Traian Moșoiu", zone: "C", note: "" },
+    { name: "Grâului", zone: "C", note: "" },
+    { name: "Graurului", zone: "C", note: "" },
+    { name: "Grădinarilor", zone: "A", note: "" },
+    { name: "Grigoraș Dinicu", zone: "A", note: "" },
+    { name: "Grigore Ureche", zone: "D", note: "" },
+    { name: "Griviței (Bulevardul)", zone: "B", note: "de la nr.39/40 la final" },
+    { name: "Griviței (Bulevardul)", zone: "C", note: "nr.1-37, nr.2-38" },
+    { name: "Gusztav Kollar", zone: "D", note: "" },
+    { name: "Gyula Halasz", zone: "D", note: "" },
+    { name: "Hans Benkner", zone: "A", note: "" },
+    { name: "Hans Eder", zone: "D", note: "" },
+    { name: "Harald Meschendorfer", zone: "D", note: "" },
+    { name: "Harghita", zone: "C", note: "" },
+    { name: "Hategului", zone: "C", note: "" },
+    { name: "Hărmanului", zone: "B", note: "nr.1-25, nr.2-68" },
+    { name: "Hărmanului", zone: "C", note: "nr.27-47, nr.70-132" },
+    { name: "Hărmanului", zone: "D", note: "de la nr.49/134 la final" },
+    { name: "Hărmanului (Fundătura)", zone: "C", note: "" },
+    { name: "Henri Coandă", zone: "C", note: "" },
+    { name: "Hermann Oberth", zone: "B", note: "" },
+    { name: "Horia", zone: "B", note: "" },
+    { name: "Hortensiei", zone: "C", note: "" },
+    { name: "Iancu Jianu", zone: "B", note: "" },
+    { name: "Iasomiei", zone: "B", note: "" },
+    { name: "Iazului", zone: "D", note: "" },
+    { name: "Iezer", zone: "C", note: "" },
+    { name: "Ilie Minea", zone: "D", note: "" },
+    { name: "Independenței", zone: "C", note: "" },
+    { name: "Ineu", zone: "C", note: "" },
+    { name: "Institutului", zone: "C", note: "" },
+    { name: "Inului", zone: "D", note: "" },
+    { name: "Ioan Barac", zone: "D", note: "" },
+    { name: "Ioan Bogdan", zone: "C", note: "" },
+    { name: "Ioan C. Panțu", zone: "D", note: "" },
+    { name: "Ioan Clopotel", zone: "C", note: "" },
+    { name: "Ioan Colan", zone: "D", note: "" },
+    { name: "Ioan Dariu", zone: "D", note: "" },
+    { name: "Ioan Huniade", zone: "D", note: "" },
+    { name: "Ioan Meșotă", zone: "D", note: "" },
+    { name: "Ioan Mețianu", zone: "D", note: "" },
+    { name: "Ioan Popasu", zone: "D", note: "" },
+    { name: "Ioan Popea", zone: "D", note: "" },
+    { name: "Ioan Ursu", zone: "D", note: "" },
+    { name: "Ioan V. Socec", zone: "D", note: "" },
+    { name: "Ion C. Brătianu", zone: "D", note: "" },
+    { name: "Ion Creangă", zone: "B", note: "" },
+    { name: "Ion Drăgușanu Codru", zone: "D", note: "" },
+    { name: "Ion Heliade Rădulescu", zone: "C", note: "" },
+    { name: "Ion Lemeny Bran", zone: "D", note: "" },
+    { name: "Ion Luca Caragiale", zone: "B", note: "" },
+    { name: "Ion Păun Pincio", zone: "A", note: "" },
+    { name: "Ion Sassu Ducșoara", zone: "D", note: "" },
+    { name: "Ion Slavici", zone: "B", note: "" },
+    { name: "Ionel Teodoreanu", zone: "D", note: "" },
+    { name: "Ionescu Crum", zone: "D", note: "" },
+    { name: "Iosif Șilimon", zone: "D", note: "" },
+    { name: "Irisului", zone: "D", note: "" },
+    { name: "Islaz", zone: "C", note: "" },
+    { name: "Iuliu Maniu", zone: "A", note: "" },
+    { name: "Iulius Römer", zone: "D", note: "" },
+    { name: "Izvorul Rece", zone: "A", note: "" },
+    { name: "Izvorului", zone: "D", note: "" },
+    { name: "Înfrățirii", zone: "B", note: "" },
+    { name: "Învățătorilor", zone: "C", note: "de la nr.2-14, de la nr.1 la final" },
+    { name: "Învățătorilor", zone: "D", note: "de la nr.16 la final" },
+    { name: "Jepilor", zone: "B", note: "" },
+    { name: "Johan Lukas Hedwig", zone: "D", note: "" },
+    { name: "Johann Gott", zone: "A", note: "" },
+    { name: "Johannes Honterus (Curtea)", zone: "A", note: "" },
+    { name: "Junilor", zone: "C", note: "" },
+    { name: "Jupiter", zone: "C", note: "" },
+    { name: "Karl Lehmann", zone: "B", note: "" },
+    { name: "Lacurilor", zone: "C", note: "" },
+    { name: "Lalelelor", zone: "C", note: "" },
+    { name: "Laminoarelor", zone: "D", note: "" },
+    { name: "Lânii", zone: "D", note: "" },
+    { name: "Lanurilor", zone: "D", note: "" },
+    { name: "Latină", zone: "C", note: "" },
+    { name: "Laurian Someșan", zone: "D", note: "" },
+    { name: "Lăcrămioarelor (Aleea)", zone: "B", note: "" },
+    { name: "Lămâiței", zone: "C", note: "" },
+    { name: "Lebedei", zone: "C", note: "" },
+    { name: "Lemnarilor", zone: "C", note: "" },
+    { name: "Levănțicăi", zone: "C", note: "" },
+    { name: "Liliacului", zone: "D", note: "" },
+    { name: "Livada Vulturului", zone: "B", note: "" },
+    { name: "Livezii (Șirul)", zone: "A", note: "" },
+    { name: "Livezilor", zone: "D", note: "" },
+    { name: "Liviu Cornel Babeș", zone: "C", note: "" },
+    { name: "Liviu Rebreanu", zone: "D", note: "" },
+    { name: "Locomotivei", zone: "C", note: "" },
+    { name: "Lotrului", zone: "C", note: "" },
+    { name: "Lotusului", zone: "D", note: "" },
+    { name: "Lucács Irén", zone: "D", note: "" },
+    { name: "Luceafărului", zone: "D", note: "" },
+    { name: "Lucernei", zone: "D", note: "" },
+    { name: "Lucian Blaga", zone: "A", note: "" },
+    { name: "Lucian Valeriu Bologa", zone: "D", note: "" },
+    { name: "Ludwig Van Beethoven (Șirul)", zone: "A", note: "" },
+    { name: "Lujerului", zone: "D", note: "" },
+    { name: "Luminișului", zone: "D", note: "" },
+    { name: "Luncii", zone: "D", note: "" },
+    { name: "Lungă", zone: "B", note: "nr.1-145, nr.2-126" },
+    { name: "Lungă", zone: "C", note: "de la nr.147/128 la final" },
+    { name: "Lunii", zone: "B", note: "" },
+    { name: "Lupeni", zone: "B", note: "" },
+    { name: "Lupeni (Aleea)", zone: "B", note: "" },
+    { name: "Macului", zone: "D", note: "" },
+    { name: "Magnoliei (Aleea)", zone: "C", note: "" },
+    { name: "Maior Cranța", zone: "B", note: "" },
+    { name: "Manole Diamandi", zone: "D", note: "" },
+    { name: "Maramureș", zone: "B", note: "" },
+    { name: "Marte", zone: "C", note: "" },
+    { name: "Matei Basarab", zone: "B", note: "" },
+    { name: "Matei Corvin", zone: "D", note: "" },
+    { name: "Mattis Teutsch", zone: "B", note: "" },
+    { name: "Măcieșului", zone: "B", note: "" },
+    { name: "Măcin", zone: "C", note: "" },
+    { name: "Măgurii", zone: "D", note: "" },
+    { name: "Mălăiești", zone: "B", note: "" },
+    { name: "Mălinului", zone: "D", note: "" },
+    { name: "Mărășești", zone: "C", note: "" },
+    { name: "Mărgăritarelor", zone: "C", note: "" },
+    { name: "Mecanicilor", zone: "C", note: "" },
+    { name: "Memorandumului", zone: "B", note: "" },
+    { name: "Mercur (Aleea)", zone: "C", note: "" },
+    { name: "Merilor", zone: "D", note: "" },
+    { name: "Meseriașilor", zone: "B", note: "" },
+    { name: "Mesteacănului", zone: "D", note: "" },
+    { name: "Mestecăniș", zone: "B", note: "" },
+    { name: "Metalurgiștilor", zone: "C", note: "" },
+    { name: "Mică", zone: "C", note: "" },
+    { name: "Michael Weiss", zone: "A", note: "" },
+    { name: "Micșunelelor", zone: "C", note: "" },
+    { name: "Micu Klein", zone: "B", note: "" },
+    { name: "Mierlei", zone: "C", note: "" },
+    { name: "Mihai Eminescu", zone: "B", note: "" },
+    { name: "Mihai Viteazul", zone: "B", note: "nr.1-23, nr.2-114" },
+    { name: "Mihai Viteazul", zone: "C", note: "de la nr.25/116 la final" },
+    { name: "Mihail Kogălniceanu", zone: "A", note: "" },
+    { name: "Mihail Sadoveanu", zone: "A", note: "" },
+    { name: "Mihaly Cseret", zone: "D", note: "" },
+    { name: "Mimozei (Aleea)", zone: "C", note: "" },
+    { name: "Minerva (Aleea)", zone: "C", note: "" },
+    { name: "Mioriței", zone: "B", note: "" },
+    { name: "Mirăslău", zone: "C", note: "" },
+    { name: "Mircea cel Bătrân", zone: "B", note: "" },
+    { name: "Mircea Suciu Sibianu", zone: "D", note: "" },
+    { name: "Mircești", zone: "D", note: "" },
+    { name: "Miron Costin", zone: "A", note: "" },
+    { name: "Mișu Fotino", zone: "D", note: "" },
+    { name: "Mitropolit Andrei Șaguna (Șirul)", zone: "B", note: "" },
+    { name: "Moldovei", zone: "B", note: "" },
+    { name: "Molidului", zone: "B", note: "" },
+    { name: "Molnar Janos", zone: "D", note: "" },
+    { name: "Montana", zone: "D", note: "" },
+    { name: "Morarului", zone: "D", note: "" },
+    { name: "Morii", zone: "C", note: "" },
+    { name: "Movilei", zone: "D", note: "" },
+    { name: "Mugurului", zone: "D", note: "" },
+    { name: "Muncii (Bulevardul)", zone: "B", note: "" },
+    { name: "Muncitorilor", zone: "C", note: "" },
+    { name: "Munteniei", zone: "B", note: "" },
+    { name: "Murelor", zone: "D", note: "" },
+    { name: "Mureșenilor", zone: "A", note: "" },
+    { name: "Mureșului", zone: "B", note: "" },
+    { name: "Mușetelului (Aleea)", zone: "D", note: "" },
+    { name: "N. D. Cocea", zone: "A", note: "" },
+    { name: "Napoca", zone: "A", note: "" },
+    { name: "Narciselor", zone: "D", note: "" },
+    { name: "Neagoe Basarab", zone: "B", note: "" },
+    { name: "Neajlov", zone: "C", note: "" },
+    { name: "Negoiu", zone: "A", note: "" },
+    { name: "Neptun", zone: "C", note: "" },
+    { name: "Nicola Nicolau", zone: "D", note: "" },
+    { name: "Nicolae Bălcescu", zone: "A", note: "" },
+    { name: "Nicolae Filimon", zone: "B", note: "" },
+    { name: "Nicolae Iorga", zone: "A", note: "" },
+    { name: "Nicolae Labiș", zone: "D", note: "" },
+    { name: "Nicolae Orghidan", zone: "D", note: "" },
+    { name: "Nicolae Pop", zone: "D", note: "" },
+    { name: "Nicolae Teclu", zone: "B", note: "" },
+    { name: "Nicolae Titulescu", zone: "A", note: "" },
+    { name: "Nicopole", zone: "B", note: "" },
+    { name: "Nicovalei", zone: "D", note: "" },
+    { name: "Nisipului de Jos", zone: "C", note: "" },
+    { name: "Nisipului de Sus", zone: "C", note: "nr.1-13, nr.2-28" },
+    { name: "Nisipului de Sus", zone: "D", note: "de la nr.13D/30 la final" },
+    { name: "Nucului", zone: "D", note: "" },
+    { name: "Nufărului", zone: "D", note: "" },
+    { name: "Oașului", zone: "B", note: "" },
+    { name: "Octavian Augustus", zone: "B", note: "" },
+    { name: "Octavian Goga", zone: "C", note: "" },
+    { name: "Oituz", zone: "C", note: "" },
+    { name: "Oitelor", zone: "D", note: "" },
+    { name: "Olarilor", zone: "B", note: "" },
+    { name: "Olteniei", zone: "B", note: "" },
+    { name: "Olteț", zone: "C", note: "" },
+    { name: "Oltului", zone: "B", note: "" },
+    { name: "Orhideelor", zone: "D", note: "" },
+    { name: "Oțelului", zone: "D", note: "" },
+    { name: "Ovid Densușianu", zone: "D", note: "" },
+    { name: "Ovidiu", zone: "B", note: "" },
+    { name: "Padina", zone: "B", note: "" },
+    { name: "Pajiștei", zone: "C", note: "" },
+    { name: "Paltinului", zone: "D", note: "" },
+    { name: "Panait Cerna", zone: "B", note: "" },
+    { name: "Pandurilor", zone: "C", note: "" },
+    { name: "Panselelor", zone: "C", note: "" },
+    { name: "Parângului", zone: "C", note: "nr.1 la final, de la nr.2-12" },
+    { name: "Parângului", zone: "D", note: "de la nr.14 la final" },
+    { name: "Pârâului", zone: "B", note: "" },
+    { name: "Pârâul Rece", zone: "D", note: "" },
+    { name: "Parcul Mic", zone: "C", note: "" },
+    { name: "Parcul Verde", zone: "D", note: "" },
+    { name: "Pașcani", zone: "D", note: "" },
+    { name: "Paul Richter", zone: "A", note: "" },
+    { name: "Pavel Roșca", zone: "D", note: "" },
+    { name: "Pavilioanele CFR", zone: "C", note: "" },
+    { name: "Păcii", zone: "C", note: "" },
+    { name: "Păducelului", zone: "D", note: "" },
+    { name: "Pădurii", zone: "D", note: "" },
+    { name: "Păltiniș", zone: "A", note: "" },
+    { name: "Păstorului", zone: "B", note: "" },
+    { name: "Pășunii", zone: "D", note: "" },
+    { name: "Pe Tocile", zone: "C", note: "" },
+    { name: "Pelicanului", zone: "C", note: "" },
+    { name: "Peneș Curcanul", zone: "A", note: "" },
+    { name: "Perșani", zone: "D", note: "" },
+    { name: "Pescărușului", zone: "C", note: "" },
+    { name: "Petöfi Sándor", zone: "C", note: "nr.1-39, nr.2-44" },
+    { name: "Petöfi Sándor", zone: "D", note: "de la nr.41/46 la final" },
+    { name: "Petre Ispirescu", zone: "C", note: "de la nr.2-10" },
+    { name: "Petre Ispirescu", zone: "D", note: "de la nr.12 la final" },
+    { name: "Petru Maior", zone: "A", note: "" },
+    { name: "Petru Rareș", zone: "A", note: "" },
+    { name: "Petuniei (Aleea)", zone: "B", note: "" },
+    { name: "Piatra Mare", zone: "C", note: "" },
+    { name: "Pictor Ion Andreescu", zone: "C", note: "" },
+    { name: "Pictor Nicolae Grigorescu", zone: "B", note: "" },
+    { name: "Pictor Pop", zone: "A", note: "" },
+    { name: "Pictor Ștefan Luchian", zone: "B", note: "" },
+    { name: "Pictor Valeriu Maximilian", zone: "D", note: "" },
+    { name: "Pietrosu", zone: "B", note: "" },
+    { name: "Pieții", zone: "A", note: "" },
+    { name: "Pinului", zone: "D", note: "" },
+    { name: "Piscului", zone: "D", note: "" },
+    { name: "Plaiului", zone: "D", note: "" },
+    { name: "Plantelor", zone: "D", note: "" },
+    { name: "Platanilor", zone: "D", note: "" },
+    { name: "Plăieșilor (Șirul)", zone: "C", note: "" },
+    { name: "Plevnei", zone: "B", note: "" },
+    { name: "Plopilor", zone: "D", note: "" },
+    { name: "Plugarilor", zone: "D", note: "" },
+    { name: "Poarta Schei", zone: "A", note: "" },
+    { name: "Podișului", zone: "D", note: "" },
+    { name: "Podragu", zone: "C", note: "" },
+    { name: "Podul Creiului", zone: "C", note: "nr.1-103, nr.2-84" },
+    { name: "Podul Creiului", zone: "D", note: "de la nr.105/86 la final" },
+    { name: "Podul lui Grid", zone: "C", note: "nr.1-11, nr.2-50" },
+    { name: "Podul lui Grid", zone: "D", note: "de la nr.13/52 la final" },
+    { name: "Poiana cu Flori", zone: "D", note: "" },
+    { name: "Poiana Doamnei", zone: "D", note: "" },
+    { name: "Poiana lui Brâncă", zone: "A", note: "" },
+    { name: "Poiana lui Catepu", zone: "A", note: "" },
+    { name: "Poiana lui Lupan", zone: "A", note: "" },
+    { name: "Poiana lui Neagoe", zone: "A", note: "" },
+    { name: "Poiana lui Stechil", zone: "A", note: "" },
+    { name: "Poiana Ruia", zone: "A", note: "" },
+    { name: "Poiana Soarelui", zone: "A", note: "" },
+    { name: "Poiana Ursului", zone: "A", note: "" },
+    { name: "Poienelor", zone: "C", note: "" },
+    { name: "Poienii (Calea)", zone: "B", note: "" },
+    { name: "Politehnicii", zone: "A", note: "" },
+    { name: "Pomiculturii", zone: "D", note: "" },
+    { name: "Popa Șapcă", zone: "B", note: "" },
+    { name: "Popasului", zone: "D", note: "" },
+    { name: "Posada", zone: "C", note: "" },
+    { name: "Postăvarului", zone: "A", note: "" },
+    { name: "Prahova", zone: "B", note: "" },
+    { name: "Primăverii", zone: "D", note: "" },
+    { name: "Printre Grădini", zone: "C", note: "" },
+    { name: "Printre Pietre", zone: "C", note: "" },
+    { name: "Privighetorii", zone: "B", note: "" },
+    { name: "Progresului", zone: "C", note: "" },
+    { name: "Prundului", zone: "B", note: "" },
+    { name: "Prunului", zone: "C", note: "" },
+    { name: "Radu Orghidan", zone: "D", note: "" },
+    { name: "Radu Pascu", zone: "D", note: "" },
+    { name: "Radu Tempea", zone: "D", note: "" },
+    { name: "Rahovei", zone: "C", note: "" },
+    { name: "Râului", zone: "D", note: "" },
+    { name: "Războieni", zone: "C", note: "" },
+    { name: "Reconstrucției", zone: "C", note: "" },
+    { name: "Republicii", zone: "A", note: "" },
+    { name: "Retezat", zone: "B", note: "" },
+    { name: "Revoluției (Piața)", zone: "A", note: "" },
+    { name: "Română", zone: "A", note: "" },
+    { name: "Romaniței", zone: "D", note: "" },
+    { name: "Rosmarinului", zone: "C", note: "" },
+    { name: "Roșiorilor", zone: "A", note: "" },
+    { name: "Roșiorilor (Fundătura)", zone: "A", note: "" },
+    { name: "Rovine", zone: "C", note: "" },
+    { name: "Rozelor", zone: "C", note: "" },
+    { name: "Salcâmului", zone: "D", note: "" },
+    { name: "Salciei", zone: "D", note: "" },
+    { name: "Salviei", zone: "C", note: "" },
+    { name: "Sânzienelor (Aleea)", zone: "B", note: "" },
+    { name: "Sarmisegetuza", zone: "C", note: "" },
+    { name: "Saturn (Bulevardul)", zone: "B", note: "nr.1-17, nr.2-30" },
+    { name: "Saturn (Bulevardul)", zone: "C", note: "de la nr.19/32 la final" },
+    { name: "Săcelelor", zone: "B", note: "" },
+    { name: "Semaforului", zone: "C", note: "" },
+    { name: "Semenicului", zone: "C", note: "" },
+    { name: "Serii", zone: "B", note: "" },
+    { name: "Sextil Pușcariu", zone: "D", note: "" },
+    { name: "Sfântul Ioan", zone: "A", note: "" },
+    { name: "Sfatului (Piața)", zone: "A", note: "" },
+    { name: "Sfinții Arhangheli", zone: "B", note: "" },
+    { name: "Sforii", zone: "B", note: "" },
+    { name: "Simeria", zone: "D", note: "" },
+    { name: "Simion Bărnuțiu", zone: "B", note: "" },
+    { name: "Simon Blasius", zone: "D", note: "" },
+    { name: "Sitarului", zone: "B", note: "nr.1-13, nr.2-8" },
+    { name: "Sitarului", zone: "C", note: "de la nr.15/10 la final" },
+    { name: "Sitei", zone: "B", note: "" },
+    { name: "Soarelui", zone: "C", note: "" },
+    { name: "Socului", zone: "C", note: "" },
+    { name: "Someșului", zone: "B", note: "" },
+    { name: "Spartacus", zone: "C", note: "" },
+    { name: "Spătarul Luca Arbore", zone: "B", note: "" },
+    { name: "Spătarul Nicolae Milescu", zone: "B", note: "" },
+    { name: "Spătarul Nicolae Milescu (Aleea)", zone: "B", note: "" },
+    { name: "Spicului", zone: "D", note: "" },
+    { name: "Stadionului", zone: "C", note: "" },
+    { name: "Stâncii", zone: "B", note: "" },
+    { name: "Stânii", zone: "B", note: "" },
+    { name: "Stejarului", zone: "D", note: "" },
+    { name: "Stejerișului", zone: "D", note: "" },
+    { name: "Stephan Ludwig Roth", zone: "A", note: "" },
+    { name: "Strunga Mieilor", zone: "D", note: "" },
+    { name: "Strungului", zone: "C", note: "" },
+    { name: "Stupinei", zone: "D", note: "" },
+    { name: "Suceava", zone: "C", note: "" },
+    { name: "Surlașului", zone: "D", note: "" },
+    { name: "Szemler Ferencz", zone: "B", note: "" },
+    { name: "Școlii", zone: "C", note: "" },
+    { name: "Șoimului", zone: "C", note: "" },
+    { name: "Ștefan Baciu", zone: "D", note: "" },
+    { name: "Ștefan Bobancu", zone: "D", note: "" },
+    { name: "Ștefan cel Mare", zone: "B", note: "" },
+    { name: "Ștefan cel Mare și Sfânt (Bulevardul)", zone: "C", note: "" },
+    { name: "Ștefan Emilian", zone: "D", note: "" },
+    { name: "Ștefan Mironescu", zone: "C", note: "" },
+    { name: "Ștefan Octavian Iosif", zone: "B", note: "" },
+    { name: "Tablei", zone: "C", note: "" },
+    { name: "Târgului", zone: "D", note: "" },
+    { name: "Târnavei", zone: "B", note: "" },
+    { name: "Teatrului (Piața)", zone: "A", note: "" },
+    { name: "Teilor", zone: "D", note: "" },
+    { name: "Teiuș", zone: "D", note: "" },
+    { name: "Telegrafului", zone: "D", note: "" },
+    { name: "Temeliei", zone: "B", note: "" },
+    { name: "Tiberiu Brediceanu (Aleea)", zone: "A", note: "" },
+    { name: "Tiberiu Eremia", zone: "D", note: "" },
+    { name: "Timiș Triaj", zone: "D", note: "" },
+    { name: "Timișul Sec", zone: "D", note: "" },
+    { name: "Tineretului", zone: "C", note: "" },
+    { name: "Tismana", zone: "D", note: "" },
+    { name: "Titan", zone: "C", note: "" },
+    { name: "Toamnei", zone: "A", note: "" },
+    { name: "Tomis", zone: "B", note: "" },
+    { name: "Toporașului", zone: "C", note: "" },
+    { name: "Torsului", zone: "D", note: "" },
+    { name: "Tractoarelor", zone: "C", note: "" },
+    { name: "Traian", zone: "B", note: "" },
+    { name: "Traian Demetrescu", zone: "B", note: "" },
+    { name: "Traian Grozăvescu", zone: "B", note: "" },
+    { name: "Traian Vuia", zone: "B", note: "" },
+    { name: "Trandafirului", zone: "D", note: "" },
+    { name: "Transilvaniei", zone: "B", note: "" },
+    { name: "Trifolului", zone: "D", note: "" },
+    { name: "Triumfului", zone: "D", note: "" },
+    { name: "Trotuș", zone: "B", note: "" },
+    { name: "Tudor Arghezi", zone: "D", note: "" },
+    { name: "Tudor Vladimirescu", zone: "C", note: "" },
+    { name: "Turnătoriei", zone: "D", note: "" },
+    { name: "Turnului", zone: "C", note: "" },
+    { name: "Țâmpei", zone: "B", note: "" },
+    { name: "Tebea", zone: "B", note: "" },
+    { name: "Țibleș", zone: "C", note: "" },
+    { name: "Țibleș (Fundătura)", zone: "C", note: "" },
+    { name: "Ucenicilor", zone: "B", note: "" },
+    { name: "Ulmului", zone: "D", note: "" },
+    { name: "Ungheni", zone: "D", note: "" },
+    { name: "Unirii (Piața)", zone: "B", note: "" },
+    { name: "Universității", zone: "B", note: "" },
+    { name: "Uranus", zone: "B", note: "" },
+    { name: "Urziceni", zone: "D", note: "" },
+    { name: "Valea Albă", zone: "C", note: "" },
+    { name: "Valea Cetății (Bulevardul)", zone: "B", note: "" },
+    { name: "Valea Cheii", zone: "A", note: "" },
+    { name: "Valea Dragă", zone: "A", note: "" },
+    { name: "Valea Jiului", zone: "C", note: "" },
+    { name: "Valea Lungă", zone: "A", note: "" },
+    { name: "Valea Rece", zone: "D", note: "" },
+    { name: "Valea Sticlăriei", zone: "B", note: "" },
+    { name: "Valea Tei", zone: "C", note: "nr.1-31, nr.2-42" },
+    { name: "Valea Tei", zone: "D", note: "de la nr.33/44 la final" },
+    { name: "Valea Timișului", zone: "C", note: "" },
+    { name: "Valentin Wagner", zone: "A", note: "" },
+    { name: "Valeria Căliman", zone: "D", note: "" },
+    { name: "Valeriu Braniște", zone: "D", note: "" },
+    { name: "Vânătorilor de Munte", zone: "B", note: "" },
+    { name: "Vânătorului", zone: "B", note: "" },
+    { name: "Vârful cu Dor", zone: "B", note: "" },
+    { name: "Variște", zone: "C", note: "nr.1-15, de la nr.2 la final" },
+    { name: "Variște", zone: "D", note: "de la nr.17 la final" },
+    { name: "Vasile Alecsandri", zone: "B", note: "" },
+    { name: "Vasile Cârlova", zone: "C", note: "" },
+    { name: "Vasile Copilu Chiatra", zone: "D", note: "" },
+    { name: "Vasile Goldiș", zone: "C", note: "" },
+    { name: "Vasile Lupu", zone: "C", note: "" },
+    { name: "Venus", zone: "C", note: "" },
+    { name: "Verii", zone: "A", note: "" },
+    { name: "Victor Jinga", zone: "D", note: "" },
+    { name: "Victoriei (Bulevardul)", zone: "A", note: "" },
+    { name: "Vidin", zone: "C", note: "" },
+    { name: "Viktor Molnar", zone: "D", note: "" },
+    { name: "Violetelor (Aleea)", zone: "C", note: "" },
+    { name: "Viorelelor", zone: "C", note: "" },
+    { name: "Vișinului", zone: "C", note: "" },
+    { name: "Vlad Țepeș", zone: "A", note: "" },
+    { name: "Vrancei", zone: "C", note: "" },
+    { name: "Vulcan", zone: "C", note: "" },
+    { name: "Vulturului", zone: "B", note: "" },
+    { name: "Warthe", zone: "B", note: "" },
+    { name: "Wilhelm Moress", zone: "D", note: "" },
+    { name: "Zaharia Bârsan", zone: "D", note: "" },
+    { name: "Zaharia Carcalechi", zone: "D", note: "" },
+    { name: "Zaharia Stancu", zone: "D", note: "" },
+    { name: "Zambilelor", zone: "C", note: "" },
+    { name: "Zarand", zone: "C", note: "" },
+    { name: "Zizinului", zone: "B", note: "nr.1-67, nr.2-52" },
+    { name: "Zizinului", zone: "C", note: "de la nr.69/54 la final" },
+    { name: "Zlatna", zone: "D", note: "" },
+    { name: "Zmeurei", zone: "B", note: "" },
+    { name: "Zorelelor", zone: "D", note: "" },
+    { name: "Zorilor", zone: "B", note: "" }
+];
 
-        const buildingTaxRates = {
-            fizica: { residential: 0.001, nonResidential: 0.005 },
-            juridica: { residential: 0.002, nonResidential: 0.013 }
-        };
+// =====================================================
+// TAB NAVIGATION
+// =====================================================
+function showTab(tab) {
+    ['cladiri', 'auto', 'teren'].forEach(t => {
+        document.getElementById('content-' + t).classList.add('hidden');
+        document.getElementById('tab-' + t).classList.remove('tab-active');
+        document.getElementById('tab-' + t).classList.add('tab-inactive');
+    });
+    document.getElementById('content-' + tab).classList.remove('hidden');
+    document.getElementById('tab-' + tab).classList.remove('tab-inactive');
+    document.getElementById('tab-' + tab).classList.add('tab-active');
+}
 
-        const vehicleBaseTaxRates = {
-            motociclete_sub1600: { noneuro: 19.5, euro4: 18.8, euro5: 17.6, euro6: 16.5, hybrid: 16.2 },
-            motociclete_peste1600: { noneuro: 22.1, euro4: 21.3, euro5: 19.9, euro6: 18.7, hybrid: 18.4 },
-            autoturism_sub1600: { noneuro: 19.5, euro4: 18.8, euro5: 17.6, euro6: 16.5, hybrid: 16.2 },
-            autoturism_1601_2000: { noneuro: 29.7, euro4: 28.5, euro5: 26.7, euro6: 25.1, hybrid: 24.6 },
-            autoturism_2001_2600: { noneuro: 92.2, euro4: 88.6, euro5: 82.8, euro6: 77.8, hybrid: 76.3 },
-            autoturism_2601_3000: { noneuro: 182.9, euro4: 172.8, euro5: 154.1, euro6: 151.2, hybrid: 149.8 },
-            autoturism_peste3000: { noneuro: 319.0, euro4: 297.3, euro5: 294.4, euro6: 290.0, hybrid: 275.5 },
-            microbuze: { noneuro: 31.2, euro4: 30.0, euro5: 28.1, euro6: 26.4, hybrid: 25.9 },
-            autoutilitare_sub12t: { noneuro: 39.0, euro4: 37.5, euro5: 35.1, euro6: 33.0, hybrid: 32.4 }
-        };
+// =====================================================
+// EARLY PAYMENT DISCOUNT
+// =====================================================
+document.getElementById('earlyPayment').addEventListener('change', function() {
+    document.getElementById('discountBadge').classList.toggle('hidden', !this.checked);
+    calculateBuilding();
+    calculateVehicle();
+    calculateLand();
+});
 
-        const trailerTaxRates = { sub1t: 14.16, '1t_5t': 53.51, '5t_10t': 81.83, peste10t: 100.73 };
+// =====================================================
+// STREET SEARCH - AUTOCOMPLETE
+// =====================================================
+function removeDiacritics(str) {
+    return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+              .replace(/ș/g, 's').replace(/Ș/g, 'S')
+              .replace(/ț/g, 't').replace(/Ț/g, 'T')
+              .replace(/ă/g, 'a').replace(/Ă/g, 'A')
+              .replace(/â/g, 'a').replace(/Â/g, 'A')
+              .replace(/î/g, 'i').replace(/Î/g, 'I');
+}
 
-        const additionalRates = { noneuro: 1.0, euro4: 1.0, euro5: 0.75, euro6: 0.35, hybrid: 0.05 };
+function searchStreet(inputId, autocompleteId, resultId) {
+    const input = document.getElementById(inputId);
+    const autocomplete = document.getElementById(autocompleteId);
+    const query = removeDiacritics(input.value.toLowerCase().trim());
+    
+    autocomplete.innerHTML = '';
+    if (query.length < 2) {
+        autocomplete.classList.add('hidden');
+        return;
+    }
+    
+    const matches = streetData.filter(s => 
+        removeDiacritics(s.name.toLowerCase()).includes(query)
+    ).slice(0, 15);
+    
+    if (matches.length === 0) {
+        autocomplete.classList.add('hidden');
+        return;
+    }
+    
+    matches.forEach(street => {
+        const div = document.createElement('div');
+        div.innerHTML = `
+            <span class="font-medium">${street.name}</span>
+            <span class="zone-badge zone-${street.zone} ml-2">Zona ${street.zone}</span>
+            ${street.note ? `<span class="text-xs text-gray-500 ml-2">${street.note}</span>` : ''}
+        `;
+        div.addEventListener('click', () => selectStreet(street, inputId, autocompleteId, resultId));
+        autocomplete.appendChild(div);
+    });
+    
+    autocomplete.classList.remove('hidden');
+}
 
-        const landTaxRates = {
-            intravilan_constructii: { A: 0.0060, B: 0.0054, C: 0.0054, D: 0.0036 },
-            intravilan_arabil: { A: 0.0112, B: 0.0056, C: 0.0051, D: 0.0041 },
-            intravilan_pasune: { A: 0.0054, B: 0.0051, C: 0.0051, D: 0.0036 },
-            intravilan_faneata: { A: 0.0054, B: 0.0051, C: 0.0051, D: 0.0036 },
-            intravilan_vie: { A: 0.0129, B: 0.0094, C: 0.0075, D: 0.0051 },
-            intravilan_livada: { A: 0.0129, B: 0.0122, C: 0.0094, D: 0.0075 },
-            extravilan_arabil: { A: 0.0075, B: 0.0056, C: 0.0051, D: 0.0041 },
-            extravilan_pasune: { A: 0.0056, B: 0.0051, C: 0.0041, D: 0.0036 },
-            extravilan_faneata: { A: 0.0056, B: 0.0051, C: 0.0041, D: 0.0036 }
-        };
-
-        // Utility functions
-        function formatCurrency(value) {
-            return new Intl.NumberFormat('ro-RO', { style: 'currency', currency: 'RON', minimumFractionDigits: 2 }).format(value);
-        }
-
-        function isEarlyPayment() {
-            return document.getElementById('earlyPayment').checked;
-        }
-
-        // Tab management
-        function showTab(tabName) {
-            ['cladiri', 'auto', 'teren'].forEach(tab => {
-                document.getElementById('content-' + tab).classList.add('hidden');
-                document.getElementById('tab-' + tab).classList.remove('tab-active');
-                document.getElementById('tab-' + tab).classList.add('tab-inactive');
-            });
-            document.getElementById('content-' + tabName).classList.remove('hidden');
-            document.getElementById('tab-' + tabName).classList.add('tab-active');
-            document.getElementById('tab-' + tabName).classList.remove('tab-inactive');
-        }
-
-        // Building calculation
-        function calculateBuilding() {
-            const area = parseFloat(document.getElementById('buildingArea').value) || 0;
-            const material = document.getElementById('buildingMaterial').value;
-            const hasUtilities = document.getElementById('hasUtilities').checked;
-            const ownerType = document.getElementById('buildingOwnerType').value;
-            const buildingType = document.getElementById('buildingType').value;
-
-            const valuePerSqm = hasUtilities ? buildingValues[material].withUtilities : buildingValues[material].withoutUtilities;
-            const baseValue = area * valuePerSqm;
-            const rate = buildingTaxRates[ownerType][buildingType];
-            let tax = baseValue * rate;
-
-            if (isEarlyPayment()) tax *= 0.9;
-
-            document.getElementById('buildingBaseValue').textContent = formatCurrency(baseValue);
-            document.getElementById('buildingRate').textContent = (rate * 100).toFixed(1) + '%';
-            document.getElementById('buildingTax').textContent = formatCurrency(tax);
-            document.getElementById('buildingDiscount').classList.toggle('hidden', !isEarlyPayment() || tax === 0);
-        }
-
-        // Vehicle type change handler
-        function onVehicleTypeChange() {
-            const vehicleType = document.getElementById('vehicleType').value;
-            const isTrailer = vehicleType === 'rulota_tractata';
-
-            document.getElementById('engineSection').classList.toggle('hidden', isTrailer);
-            document.getElementById('trailerSection').classList.toggle('hidden', !isTrailer);
-            document.getElementById('pollutionWarning').classList.toggle('hidden', isTrailer);
-            document.getElementById('additionalRatesInfo').classList.toggle('hidden', isTrailer);
-            document.getElementById('vehicleDetails').classList.toggle('hidden', isTrailer);
-
-            document.getElementById('autorulotaInfo').classList.toggle('hidden', vehicleType !== 'autorulota_m1');
-            document.getElementById('vehiculSpecialInfo').classList.toggle('hidden', vehicleType !== 'vehicul_special');
-
-            // Update result box colors
-            const resultBox = document.getElementById('vehicleResult');
-            if (isTrailer) {
-                resultBox.className = 'bg-gradient-to-r from-teal-500 to-green-500 rounded-xl p-6 text-white';
-                document.getElementById('vehicleBreakdown').classList.add('hidden');
-                document.getElementById('trailerInfo').classList.remove('hidden');
-            } else {
-                resultBox.className = 'bg-gradient-to-r from-orange-500 to-red-500 rounded-xl p-6 text-white';
-                document.getElementById('vehicleBreakdown').classList.remove('hidden');
-                document.getElementById('trailerInfo').classList.add('hidden');
-            }
-
-            calculateVehicle();
-        }
-
-        // Vehicle calculation
-        function calculateVehicle() {
-            const vehicleType = document.getElementById('vehicleType').value;
-            const isTrailer = vehicleType === 'rulota_tractata';
-
-            if (isTrailer) {
-                const mass = document.getElementById('trailerMass').value;
-                let tax = trailerTaxRates[mass];
-                if (isEarlyPayment()) tax *= 0.9;
-                document.getElementById('vehicleTax').textContent = formatCurrency(tax);
-                document.getElementById('vehicleDiscount').classList.toggle('hidden', !isEarlyPayment() || tax === 0);
-                return;
-            }
-
-            const capacity = parseFloat(document.getElementById('engineCapacity').value) || 0;
-            const pollutionNorm = document.getElementById('pollutionNorm').value;
-
-            // Update highlighted rate
-            ['noneuro', 'euro4', 'euro5', 'euro6', 'hybrid'].forEach(norm => {
-                const el = document.getElementById('rate-' + norm);
-                if (norm === pollutionNorm) {
-                    el.classList.add('bg-orange-200', 'ring-2', 'ring-orange-400');
-                    el.classList.remove('bg-white');
-                } else {
-                    el.classList.remove('bg-orange-200', 'ring-2', 'ring-orange-400');
-                    el.classList.add('bg-white');
-                }
-            });
-
-            if (capacity === 0) {
-                document.getElementById('vehicleTax').textContent = formatCurrency(0);
-                document.getElementById('vehicleDetails').classList.add('hidden');
-                return;
-            }
-
-            // Get vehicle category
-            let category;
-            if (vehicleType === 'motocicleta') {
-                category = capacity <= 1600 ? 'motociclete_sub1600' : 'motociclete_peste1600';
-            } else if (vehicleType === 'autoturism' || vehicleType === 'autorulota_m1') {
-                if (capacity <= 1600) category = 'autoturism_sub1600';
-                else if (capacity <= 2000) category = 'autoturism_1601_2000';
-                else if (capacity <= 2600) category = 'autoturism_2001_2600';
-                else if (capacity <= 3000) category = 'autoturism_2601_3000';
-                else category = 'autoturism_peste3000';
-            } else if (vehicleType === 'microbuz') {
-                category = 'microbuze';
-            } else {
-                category = 'autoutilitare_sub12t';
-            }
-
-            const baseRate = vehicleBaseTaxRates[category][pollutionNorm];
-            const units = Math.ceil(capacity / 200);
-            const baseTax = baseRate * units;
-            const additionalRate = additionalRates[pollutionNorm];
-            const additionalTax = baseTax * additionalRate;
-            let totalTax = baseTax + additionalTax;
-
-            if (isEarlyPayment()) totalTax *= 0.9;
-
-            // Update UI
-            document.getElementById('vehicleDetails').classList.remove('hidden');
-            document.getElementById('vehicleUnits').textContent = units;
-            document.getElementById('vehicleBaseRate').textContent = baseRate.toFixed(2) + ' lei';
-            document.getElementById('vehicleBaseTax').textContent = formatCurrency(baseTax);
-            document.getElementById('vehicleAdditionalTax').textContent = '+' + formatCurrency(additionalTax);
-
-            document.getElementById('resultBaseTax').textContent = formatCurrency(baseTax);
-            document.getElementById('resultAdditionalPercent').textContent = (additionalRate * 100).toFixed(0);
-            document.getElementById('resultAdditionalTax').textContent = formatCurrency(additionalTax);
-            document.getElementById('resultSubtotal').textContent = formatCurrency(baseTax + additionalTax);
-            document.getElementById('vehicleTax').textContent = formatCurrency(totalTax);
-            document.getElementById('vehicleDiscount').classList.toggle('hidden', !isEarlyPayment() || totalTax === 0);
-        }
-
-        // Land calculation
-        function calculateLand() {
-            const area = parseFloat(document.getElementById('landArea').value) || 0;
-            const category = document.getElementById('landCategory').value;
-            const zone = document.getElementById('landZone').value;
-
-            const ratePerSqm = landTaxRates[category]?.[zone] || 0;
-            let tax = area * ratePerSqm;
-
-            if (isEarlyPayment()) tax *= 0.9;
-
-            document.getElementById('landTax').textContent = formatCurrency(tax);
-            document.getElementById('landDiscount').classList.toggle('hidden', !isEarlyPayment() || tax === 0);
-
-            if (area > 0) {
-                document.getElementById('landRateInfo').classList.remove('hidden');
-                document.getElementById('landRateValue').textContent = (ratePerSqm * 10000).toFixed(0) + ' lei/ha';
-            } else {
-                document.getElementById('landRateInfo').classList.add('hidden');
-            }
-        }
-
-        // Early payment toggle handler
-        document.getElementById('earlyPayment').addEventListener('change', function() {
-            document.getElementById('discountBadge').classList.toggle('hidden', !this.checked);
-            calculateBuilding();
-            calculateVehicle();
-            calculateLand();
-        });
-
-        // Initialize
+function selectStreet(street, inputId, autocompleteId, resultId) {
+    const input = document.getElementById(inputId);
+    const autocomplete = document.getElementById(autocompleteId);
+    const resultDiv = document.getElementById(resultId);
+    
+    input.value = street.name;
+    autocomplete.classList.add('hidden');
+    resultDiv.classList.remove('hidden');
+    
+    if (resultId === 'streetResult') {
+        document.getElementById('selectedStreet').textContent = street.name;
+        document.getElementById('zoneBadge').textContent = `Zona ${street.zone}`;
+        document.getElementById('zoneBadge').className = `zone-badge zone-${street.zone}`;
+        document.getElementById('streetNote').textContent = street.note || '';
+        document.getElementById('buildingZone').value = street.zone;
         calculateBuilding();
-        calculateVehicle();
+    } else if (resultId === 'landStreetResult') {
+        document.getElementById('landSelectedStreet').textContent = street.name;
+        document.getElementById('landZoneBadge').textContent = `Zona ${street.zone}`;
+        document.getElementById('landZoneBadge').className = `zone-badge zone-${street.zone}`;
+        document.getElementById('landZone').value = street.zone;
         calculateLand();
-    </script>
+    }
+}
+
+function checkStreetNumber() {
+    // Pentru străzi cu zone multiple, verifică numărul
+    const streetName = document.getElementById('streetSearch').value;
+    const streetNum = parseInt(document.getElementById('streetNumber').value) || 0;
+    
+    if (streetNum > 0 && streetName) {
+        const matchingStreets = streetData.filter(s => s.name === streetName);
+        if (matchingStreets.length > 1) {
+            // Încearcă să determine zona corectă
+            for (const street of matchingStreets) {
+                if (street.note && isNumberInRange(streetNum, street.note)) {
+                    document.getElementById('zoneBadge').textContent = `Zona ${street.zone}`;
+                    document.getElementById('zoneBadge').className = `zone-badge zone-${street.zone}`;
+                    document.getElementById('buildingZone').value = street.zone;
+                    calculateBuilding();
+                    break;
+                }
+            }
+        }
+    }
+}
+
+function isNumberInRange(num, note) {
+    // Parsează intervalul de numere din notă
+    const ranges = note.match(/(\d+)-(\d+)/g);
+    if (ranges) {
+        for (const range of ranges) {
+            const [start, end] = range.split('-').map(Number);
+            if (num >= start && num <= end) return true;
+        }
+    }
+    if (note.includes('la final') && num >= parseInt(note.match(/\d+/)?.[0] || 0)) {
+        return true;
+    }
+    return false;
+}
+
+// Event listeners pentru autocomplete
+document.getElementById('streetSearch').addEventListener('input', () => 
+    searchStreet('streetSearch', 'streetAutocomplete', 'streetResult'));
+document.getElementById('landStreetSearch').addEventListener('input', () => 
+    searchStreet('landStreetSearch', 'landStreetAutocomplete', 'landStreetResult'));
+
+// Close autocomplete on outside click
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('#streetSearch') && !e.target.closest('#streetAutocomplete')) {
+        document.getElementById('streetAutocomplete').classList.add('hidden');
+    }
+    if (!e.target.closest('#landStreetSearch') && !e.target.closest('#landStreetAutocomplete')) {
+        document.getElementById('landStreetAutocomplete').classList.add('hidden');
+    }
+});
+
+// =====================================================
+// BUILDING TAX CALCULATION
+// =====================================================
+function calculateBuilding() {
+    const ownerType = document.getElementById('buildingOwnerType').value;
+    const buildingType = document.getElementById('buildingType').value;
+    const zone = document.getElementById('buildingZone').value;
+    const age = document.getElementById('buildingAge').value;
+    const blockType = document.getElementById('buildingBlockType').value;
+    const value = parseFloat(document.getElementById('buildingValue').value) || 0;
+    const earlyPayment = document.getElementById('earlyPayment').checked;
+    
+    // Cote impozit conform HCL 1142/2025
+    let rate;
+    if (ownerType === 'fizica') {
+        rate = buildingType === 'residential' ? 0.001 : 0.005;
+    } else {
+        rate = buildingType === 'residential' ? 0.002 : 0.013;
+    }
+    
+    // Coeficienți zonă (Brașov - Rang I) conform Art. 457 alin. 6
+    const zoneCoefs = { A: 2.60, B: 2.50, C: 2.40, D: 2.30 };
+    let zoneCoef = zoneCoefs[zone];
+    
+    // Ajustare pentru apartamente în bloc
+    if (blockType === 'bloc') {
+        zoneCoef -= 0.10;
+    }
+    
+    // Reduceri pentru vechime
+    const ageReductions = { sub30: 0, '30_50': 0.10, '50_100': 0.30, peste100: 0.50 };
+    const ageReduction = ageReductions[age];
+    
+    // Calcul impozit
+    // Pentru PF: valoarea impozabilă = valoare * coef_zonă * (1 - reducere_vechime)
+    // Pentru PJ: valoarea impozabilă = valoare contabilă
+    let taxableValue = value;
+    if (ownerType === 'fizica') {
+        taxableValue = value * zoneCoef * (1 - ageReduction);
+    }
+    
+    let tax = taxableValue * rate;
+    
+    // Bonificație plată anticipată
+    if (earlyPayment) {
+        tax *= 0.90;
+    }
+    
+    // Afișare rezultate
+    document.getElementById('buildingRateDisplay').textContent = (rate * 100).toFixed(1) + '%';
+    document.getElementById('buildingZoneCoefDisplay').textContent = zoneCoef.toFixed(2);
+    document.getElementById('buildingAgeDisplay').textContent = '-' + (ageReduction * 100) + '%';
+    document.getElementById('buildingDiscountDisplay').textContent = earlyPayment ? '-10%' : '0%';
+    document.getElementById('buildingTax').textContent = tax.toLocaleString('ro-RO', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' RON';
+    document.getElementById('buildingDiscount').classList.toggle('hidden', !earlyPayment);
+}
+
+// =====================================================
+// VEHICLE TAX CALCULATION
+// =====================================================
+function onVehicleTypeChange() {
+    const vehicleType = document.getElementById('vehicleType').value;
+    const engineDiv = document.getElementById('engineCapacityDiv');
+    const pollutionDiv = document.getElementById('pollutionDiv');
+    const trailerSection = document.getElementById('trailerSection');
+    
+    if (vehicleType === 'rulota_tractata') {
+        engineDiv.classList.add('hidden');
+        pollutionDiv.classList.add('hidden');
+        trailerSection.classList.remove('hidden');
+    } else {
+        engineDiv.classList.remove('hidden');
+        pollutionDiv.classList.remove('hidden');
+        trailerSection.classList.add('hidden');
+    }
+    calculateVehicle();
+}
+
+function calculateVehicle() {
+    const vehicleType = document.getElementById('vehicleType').value;
+    const engineCapacity = parseFloat(document.getElementById('engineCapacity').value) || 0;
+    const pollutionNorm = document.getElementById('pollutionNorm').value;
+    const earlyPayment = document.getElementById('earlyPayment').checked;
+    
+    let baseTax = 0;
+    let surcharge = 0;
+    let surchargePercent = 0;
+    
+    // Tarife fixe pentru rulotă
+    if (vehicleType === 'rulota_tractata') {
+        const trailerMass = document.getElementById('trailerMass').value;
+        const trailerRates = { sub1t: 14.16, '1t_5t': 53.51, '5t_10t': 81.83, peste10t: 100.73 };
+        baseTax = trailerRates[trailerMass];
+        // Nu se aplică suprataxă de poluare la rulote
+    } 
+    // Autorulotă M1 - are tarif fix, fără suprataxă poluare
+    else if (vehicleType === 'autorulota_m1') {
+        baseTax = 127.03; // Tarif fix conform Cod Fiscal
+    }
+    // Vehicule cu motor - tarife pe capacitate + suprataxă poluare
+    else {
+        // Tarife de bază per 200 cm³ conform HCL 1142/2025
+        const brackets = [
+            { max: 1600, rate: 9.47 },
+            { max: 2000, rate: 18.97 },
+            { max: 2600, rate: 37.96 },
+            { max: 3000, rate: 75.92 },
+            { max: Infinity, rate: 94.88 }
+        ];
+        
+        const bracket = brackets.find(b => engineCapacity <= b.max);
+        const units = Math.ceil(engineCapacity / 200);
+        baseTax = units * (bracket ? bracket.rate : 94.88);
+        
+        // Suprataxe poluare Brașov (Art. 7)
+        const pollutionSurcharges = {
+            noneuro: 1.00,  // +100%
+            euro4: 1.00,    // +100%
+            euro5: 0.75,    // +75%
+            euro6: 0.35,    // +35%
+            hybrid: 0.05    // +5%
+        };
+        
+        surchargePercent = pollutionSurcharges[pollutionNorm] || 0;
+        surcharge = baseTax * surchargePercent;
+    }
+    
+    let totalTax = baseTax + surcharge;
+    
+    // Bonificație plată anticipată
+    if (earlyPayment) {
+        totalTax *= 0.90;
+    }
+    
+    // Afișare rezultate
+    document.getElementById('vehicleBaseDisplay').textContent = baseTax.toLocaleString('ro-RO', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' RON';
+    document.getElementById('vehicleSurchargeDisplay').textContent = '+' + (surchargePercent * 100) + '%';
+    document.getElementById('vehicleDiscountDisplay').textContent = earlyPayment ? '-10%' : '0%';
+    document.getElementById('vehicleTax').textContent = totalTax.toLocaleString('ro-RO', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' RON';
+    document.getElementById('vehicleDiscount').classList.toggle('hidden', !earlyPayment);
+}
+
+// =====================================================
+// LAND TAX CALCULATION
+// =====================================================
+function calculateLand() {
+    const category = document.getElementById('landCategory').value;
+    const zone = document.getElementById('landZone').value;
+    const area = parseFloat(document.getElementById('landArea').value) || 0;
+    const earlyPayment = document.getElementById('earlyPayment').checked;
+    
+    // Tarife lei/ha conform HCL 1142/2025 - Rang I
+    const landRates = {
+        intravilan_constructii: { A: 13158, B: 10863, C: 8206, D: 5578 },
+        intravilan_arabil: { A: 69, B: 52, C: 45, D: 37 },
+        extravilan_arabil: { A: 106, B: 100, C: 92, D: 83 },
+        extravilan_pasune: { A: 48, B: 46, C: 43, D: 39 }
+    };
+    
+    const ratePerHa = landRates[category]?.[zone] || 0;
+    const areaHa = area / 10000;
+    let tax = areaHa * ratePerHa;
+    
+    // Bonificație plată anticipată
+    if (earlyPayment) {
+        tax *= 0.90;
+    }
+    
+    // Afișare rezultate
+    document.getElementById('landAreaDisplay').textContent = area.toLocaleString('ro-RO') + ' m²';
+    document.getElementById('landRateDisplay').textContent = ratePerHa.toLocaleString('ro-RO') + ' lei/ha';
+    document.getElementById('landDiscountDisplay').textContent = earlyPayment ? '-10%' : '0%';
+    document.getElementById('landTax').textContent = tax.toLocaleString('ro-RO', {minimumFractionDigits: 2, maximumFractionDigits: 2}) + ' RON';
+    document.getElementById('landDiscountNote').classList.toggle('hidden', !earlyPayment);
+}
+
+// Initialize
+calculateBuilding();
+calculateVehicle();
+calculateLand();
+</script>
 </body>
 </html>
