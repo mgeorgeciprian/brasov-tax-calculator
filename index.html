@@ -31,11 +31,139 @@
 <body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen p-4 md:p-8">
     <div class="max-w-4xl mx-auto" id="app">
         <div class="bg-white rounded-2xl shadow-xl p-6 mb-6">
-            <div class="flex items-center gap-4 mb-2">
-                <div class="w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center"><span class="text-3xl">🏛️</span></div>
+            <div class="flex items-center justify-between gap-4 mb-2">
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center"><span class="text-3xl">🏛️</span></div>
+                    <div>
+                        <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Calculator Impozite Locale Brașov 2026</h1>
+                        <p class="text-gray-500">Conform HCL nr. 1142/22.12.2025 • Introdu datele din CF/Talon</p>
+                    </div>
+                </div>
+                <button onclick="toggleHelp()" class="flex items-center gap-2 px-4 py-2 bg-amber-100 hover:bg-amber-200 text-amber-800 rounded-lg font-medium transition-all">
+                    <span>❓</span> Ghid utilizare
+                </button>
+            </div>
+        </div>
+
+        <!-- GHID DE UTILIZARE -->
+        <div id="helpSection" class="hidden bg-white rounded-2xl shadow-xl p-6 mb-6 border-2 border-amber-300">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-xl font-bold text-gray-800 flex items-center gap-2">📖 Ghid de Utilizare</h2>
+                <button onclick="toggleHelp()" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+            </div>
+            
+            <div class="space-y-6 text-gray-700">
+                <!-- Introducere -->
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+                    <p class="font-medium text-blue-800">Acest calculator estimează impozitele locale pentru Brașov în 2026, conform HCL nr. 1142/22.12.2025.</p>
+                    <p class="text-sm text-blue-700 mt-1">⚠️ Rezultatele sunt orientative. Pentru calcul oficial, contactați Direcția Fiscală Brașov.</p>
+                </div>
+
+                <!-- Sectiunea Cladiri -->
                 <div>
-                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Calculator Impozite Locale Brașov 2026</h1>
-                    <p class="text-gray-500">Conform HCL nr. 1142/22.12.2025 • Introdu datele din CF/Talon</p>
+                    <h3 class="font-bold text-lg text-gray-800 mb-3 flex items-center gap-2">🏠 Impozit pe Clădiri</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">📋 De unde iau datele?</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li><strong>Cartea Funciară (CF)</strong> - suprafața, materialul construcției, anul construcției</li>
+                                <li><strong>Actul de proprietate</strong> - adresa, suprafața utilă</li>
+                                <li><strong>Raport evaluare ANEVAR</strong> - dacă ai făcut evaluare la un evaluator autorizat</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">📐 Suprafață utilă vs. SCD</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li><strong>Suprafața utilă</strong> = ce scrie în actul de proprietate (ex: 105 mp)</li>
+                                <li><strong>SCD (Suprafață Construită Desfășurată)</strong> = utilă × 1,40</li>
+                                <li>→ Dacă ai doar suprafața utilă, selectează prima opțiune și coeficientul se aplică automat</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">🗺️ Cum aflu zona fiscală?</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li>1. Caută strada ta în câmpul "Strada"</li>
+                                <li>2. Zona se completează automat (A, B, C sau D)</li>
+                                <li>3. Dacă strada are zone diferite pe porțiuni, verifică numărul</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">📋 Am raport de evaluare ANEVAR</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li>1. Selectează "Raport evaluare ANEVAR" în metodă calcul</li>
+                                <li>2. Introdu valoarea impozabilă din raport</li>
+                                <li>3. Selectează vechimea evaluării (afectează cota de impozit)</li>
+                                <li>⚠️ Evaluările mai vechi de 5 ani au penalizare!</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sectiunea Auto -->
+                <div>
+                    <h3 class="font-bold text-lg text-gray-800 mb-3 flex items-center gap-2">🚗 Impozit pe Auto</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">📋 De unde iau datele?</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li><strong>Talonul auto</strong> - capacitatea cilindrică (cmc), norma de poluare</li>
+                                <li><strong>Cartea de identitate a vehiculului (CIV)</strong> - date tehnice detaliate</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">🌿 Norma de poluare</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li><strong>Non-Euro / Euro 1-2</strong> - mașini vechi (înainte de 2000)</li>
+                                <li><strong>Euro 3-4</strong> - mașini 2000-2010</li>
+                                <li><strong>Euro 5-6</strong> - mașini noi (după 2010)</li>
+                                <li><strong>Hibrid/Electric</strong> - reducere semnificativă!</li>
+                                <li>→ Găsești norma în talon la rubrica "Categoria de poluare"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sectiunea Teren -->
+                <div>
+                    <h3 class="font-bold text-lg text-gray-800 mb-3 flex items-center gap-2">🌍 Impozit pe Teren</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">📋 De unde iau datele?</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li><strong>Cartea Funciară (CF)</strong> - suprafața în mp, categoria de folosință</li>
+                                <li><strong>Extrasul CF</strong> - detalii despre rangul localității și zona</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">🏷️ Categorii de teren</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li><strong>Intravilan construcții</strong> - teren în oraș cu clădiri</li>
+                                <li><strong>Intravilan arabil</strong> - teren în oraș fără construcții</li>
+                                <li><strong>Extravilan</strong> - teren agricol în afara orașului</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bonificatie -->
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <h3 class="font-bold text-green-800 mb-2">🎁 Bonificație 10% pentru plată anticipată</h3>
+                    <p class="text-sm text-green-700">Dacă plătești integral până la <strong>31 martie 2026</strong>, beneficiezi de reducere 10% la toate impozitele locale. Bifează opțiunea din partea de sus a calculatorului.</p>
+                </div>
+
+                <!-- Contact -->
+                <div class="bg-gray-100 rounded-lg p-4 text-sm">
+                    <h4 class="font-semibold text-gray-800 mb-2">📞 Contact Direcția Fiscală Brașov</h4>
+                    <p>Pentru verificare oficială sau întrebări: <strong>0268 416 550</strong></p>
+                    <p>Adresă: Bd. Eroilor nr. 8, Brașov</p>
                 </div>
             </div>
         </div>
@@ -105,25 +233,60 @@
                 <!-- ===== SECȚIUNE PF ===== -->
                 <div id="pfSection">
                     <div class="info-box mb-4">
-                        <p class="text-sm text-blue-800">📋 <strong>Pentru Persoane Fizice</strong> - valoarea impozabilă se calculează automat conform Art. 457 Cod Fiscal, pe baza datelor din Cartea Funciară.</p>
+                        <p class="text-sm text-blue-800">📋 <strong>Pentru Persoane Fizice</strong> - valoarea impozabilă se calculează conform Art. 457 Cod Fiscal sau din raport de evaluare ANEVAR.</p>
                     </div>
 
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Suprafață construită desfășurată (mp) <span class="text-red-500">*</span></label>
-                            <input type="number" id="buildingArea" oninput="calculateBuilding()" placeholder="Din CF - ex: 120" class="w-full p-3 border border-gray-300 rounded-lg">
-                            <p class="text-xs text-gray-500 mt-1">Include toate nivelurile (parter + etaje + mansardă)</p>
+                    <!-- Metodă calcul PF -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Metodă calcul valoare impozabilă</label>
+                        <div class="grid md:grid-cols-2 gap-3">
+                            <label class="flex items-center gap-3 p-3 border-2 rounded-lg cursor-pointer transition-all" id="methodAutoLabel">
+                                <input type="radio" name="pfMethod" value="auto" checked onchange="togglePfMethod()" class="w-5 h-5 text-blue-600">
+                                <div>
+                                    <span class="font-medium text-gray-800">📐 Calcul automat</span>
+                                    <p class="text-xs text-gray-500">Din suprafață, material, zonă, vechime</p>
+                                </div>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 border-2 rounded-lg cursor-pointer transition-all" id="methodEvalLabel">
+                                <input type="radio" name="pfMethod" value="evaluare" onchange="togglePfMethod()" class="w-5 h-5 text-blue-600">
+                                <div>
+                                    <span class="font-medium text-gray-800">📋 Raport evaluare ANEVAR</span>
+                                    <p class="text-xs text-gray-500">Valoare din evaluator autorizat</p>
+                                </div>
+                            </label>
                         </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Material construcție (din CF)</label>
-                            <select id="buildingMaterial" onchange="calculateBuilding()" class="w-full p-3 border border-gray-300 rounded-lg">
-                                <option value="A">Beton armat</option>
-                                <option value="B">Cărămidă arsă / Piatră</option>
-                                <option value="C">Cărămidă nearsă / Chirpici / Paiantă</option>
-                                <option value="D">Lemn</option>
-                                <option value="E">Alte materiale</option>
-                            </select>
+                    </div>
+
+                    <!-- Secțiune calcul automat -->
+                    <div id="pfAutoSection">
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
+                            <p class="text-xs text-blue-700">💡 <strong>SCD</strong> = Suprafață utilă × 1,40. Dacă în CF ai doar suprafața utilă, selectează opțiunea corespunzătoare.</p>
                         </div>
+
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Tip suprafață (din CF)</label>
+                                <select id="areaType" onchange="calculateBuilding()" class="w-full p-3 border border-gray-300 rounded-lg">
+                                    <option value="utila">Suprafață utilă (×1,40 = SCD)</option>
+                                    <option value="scd">Suprafață construită desfășurată</option>
+                                </select>
+                                <p class="text-xs text-gray-500 mt-1">CF-ul indică ce tip de suprafață este</p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Suprafață (mp) <span class="text-red-500">*</span></label>
+                                <input type="number" id="buildingArea" oninput="calculateBuilding()" placeholder="Din CF - ex: 105" class="w-full p-3 border border-gray-300 rounded-lg">
+                                <p id="scdConversion" class="text-xs text-blue-600 mt-1 font-medium hidden">→ SCD = <span id="scdValue">0</span> mp</p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Material construcție (din CF)</label>
+                                <select id="buildingMaterial" onchange="calculateBuilding()" class="w-full p-3 border border-gray-300 rounded-lg">
+                                    <option value="A">Beton armat</option>
+                                    <option value="B">Cărămidă arsă / Piatră</option>
+                                    <option value="C">Cărămidă nearsă / Chirpici / Paiantă</option>
+                                    <option value="D">Lemn</option>
+                                    <option value="E">Alte materiale</option>
+                                </select>
+                            </div>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-4 mt-4">
@@ -146,8 +309,9 @@
                             <label class="block text-sm font-medium text-gray-700 mb-2">Tip imobil</label>
                             <select id="buildingBlockType" onchange="calculateBuilding()" class="w-full p-3 border border-gray-300 rounded-lg">
                                 <option value="casa">Casă individuală / Vilă</option>
-                                <option value="bloc">Apartament în bloc (>3 niveluri, >8 apartamente)</option>
+                                <option value="bloc">Apartament în bloc</option>
                             </select>
+                            <p class="text-xs text-amber-600 mt-1">⚠️ Brașov nu aplică reducerea -0,10 pt. bloc</p>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Zona fiscală</label>
@@ -157,6 +321,31 @@
                                 <option value="C">Zona C (coef. 2.40)</option>
                                 <option value="D">Zona D - Periferică (coef. 2.30)</option>
                             </select>
+                        </div>
+                    </div>
+                    </div><!-- END pfAutoSection -->
+
+                    <!-- Secțiune evaluare ANEVAR pentru PF -->
+                    <div id="pfEvalSection" class="hidden">
+                        <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+                            <p class="text-sm text-amber-800">📋 <strong>Raport de evaluare ANEVAR</strong> - introduci valoarea stabilită de evaluatorul autorizat.</p>
+                            <p class="text-xs text-amber-700 mt-2">⚠️ Raportul trebuie să fie întocmit în ultimii 5 ani. Dacă evaluarea e mai veche, se pot aplica penalizări.</p>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Valoare din raport evaluare (RON) <span class="text-red-500">*</span></label>
+                                <input type="number" id="buildingValueEval" oninput="calculateBuilding()" placeholder="Ex: 450000" class="w-full p-3 border border-gray-300 rounded-lg">
+                                <p class="text-xs text-gray-500 mt-1">Valoarea impozabilă stabilită de evaluator</p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Data evaluării</label>
+                                <select id="evalAge" onchange="calculateBuilding()" class="w-full p-3 border border-gray-300 rounded-lg">
+                                    <option value="ok">Evaluare din ultimii 5 ani</option>
+                                    <option value="3y">Evaluare mai veche de 3 ani</option>
+                                    <option value="5y">Evaluare mai veche de 5 ani (penalizare!)</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -191,7 +380,7 @@
                         <div class="calc-row"><span>Valoare de bază/mp:</span><span id="calcBaseValue">0 lei</span></div>
                         <div class="calc-row"><span>Coeficient zonă:</span><span id="calcZoneCoef">×2.60</span></div>
                         <div class="calc-row"><span>Reducere vechime:</span><span id="calcAgeReduction">-0%</span></div>
-                        <div class="calc-row"><span>Ajustare bloc:</span><span id="calcBlockAdj">-0.00</span></div>
+                        <div class="calc-row text-gray-400"><span>Ajustare bloc:</span><span id="calcBlockAdj" title="Brașov nu aplică această reducere">N/A</span></div>
                         <div class="calc-row font-bold border-t border-white/30 pt-2 mt-2"><span>Valoare impozabilă:</span><span id="calcTaxableValue">0 RON</span></div>
                         <div class="calc-row"><span>Cotă impozit:</span><span id="calcRate">×0.1%</span></div>
                         <div class="calc-row"><span>Bonificație anticipată:</span><span id="calcDiscount">-0%</span></div>
@@ -1141,32 +1330,33 @@ const streetData = [
 
 // =====================================================
 // VALORI DE REFERINȚĂ CLĂDIRI PF - Art. 457 Cod Fiscal
+// Indexate pentru anul 2026 (conform HG actualizare)
 // Lei/mp suprafață construită desfășurată
 // =====================================================
 const buildingBaseValues = {
     // Cu toate instalațiile (apă, canalizare, electric, încălzire)
     all: {
-        A: 1000,  // Beton armat
-        B: 1000,  // Cărămidă arsă / Piatră  
-        C: 300,   // Cărămidă nearsă / Chirpici
-        D: 300,   // Lemn
-        E: 200    // Alte materiale
+        A: 2677,  // Beton armat
+        B: 2677,  // Cărămidă arsă  
+        C: 803,   // Cărămidă nearsă / Piatră / Chirpici
+        D: 335,   // Lemn
+        E: 335    // Alte materiale
     },
     // Fără cel puțin o instalație
     partial: {
-        A: 600,
-        B: 600,
-        C: 200,
-        D: 200,
-        E: 125
+        A: 1606,
+        B: 1606,
+        C: 535,
+        D: 201,
+        E: 201
     },
     // Fără instalații
     none: {
-        A: 600,
-        B: 600,
-        C: 200,
-        D: 200,
-        E: 100
+        A: 1606,
+        B: 1606,
+        C: 535,
+        D: 201,
+        E: 201
     }
 };
 
@@ -1193,6 +1383,47 @@ function toggleOwnerType() {
     document.getElementById('pfSection').classList.toggle('hidden', ownerType === 'juridica');
     document.getElementById('pjSection').classList.toggle('hidden', ownerType === 'fizica');
 }
+
+function toggleHelp() {
+    const helpSection = document.getElementById('helpSection');
+    helpSection.classList.toggle('hidden');
+    if (!helpSection.classList.contains('hidden')) {
+        helpSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+function togglePfMethod() {
+    const method = document.querySelector('input[name="pfMethod"]:checked').value;
+    const autoSection = document.getElementById('pfAutoSection');
+    const evalSection = document.getElementById('pfEvalSection');
+    const autoLabel = document.getElementById('methodAutoLabel');
+    const evalLabel = document.getElementById('methodEvalLabel');
+    
+    if (method === 'auto') {
+        autoSection.classList.remove('hidden');
+        evalSection.classList.add('hidden');
+        autoLabel.classList.add('border-blue-500', 'bg-blue-50');
+        autoLabel.classList.remove('border-gray-200');
+        evalLabel.classList.remove('border-blue-500', 'bg-blue-50');
+        evalLabel.classList.add('border-gray-200');
+    } else {
+        autoSection.classList.add('hidden');
+        evalSection.classList.remove('hidden');
+        evalLabel.classList.add('border-blue-500', 'bg-blue-50');
+        evalLabel.classList.remove('border-gray-200');
+        autoLabel.classList.remove('border-blue-500', 'bg-blue-50');
+        autoLabel.classList.add('border-gray-200');
+    }
+    calculateBuilding();
+}
+
+// Initialize method toggle styling on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const autoLabel = document.getElementById('methodAutoLabel');
+    if (autoLabel) {
+        autoLabel.classList.add('border-blue-500', 'bg-blue-50');
+    }
+});
 
 // =====================================================
 // EARLY PAYMENT DISCOUNT
@@ -1343,47 +1574,86 @@ function calculateBuilding() {
     let area = 0;
     
     if (ownerType === 'fizica') {
-        // PF - calcul automat din suprafață și caracteristici
-        area = parseFloat(document.getElementById('buildingArea').value) || 0;
-        const material = document.getElementById('buildingMaterial').value;
-        const utilities = document.getElementById('buildingUtilities').value;
-        const buildingYear = parseInt(document.getElementById('buildingYear').value) || 2020;
-        const blockType = document.getElementById('buildingBlockType').value;
+        // Verifică metoda aleasă pentru PF
+        const pfMethod = document.querySelector('input[name="pfMethod"]:checked')?.value || 'auto';
         
-        // Valoare de bază pe mp
-        baseValuePerSqm = buildingBaseValues[utilities][material];
-        
-        // Coeficient zonă
-        let effectiveZoneCoef = zoneCoef;
-        
-        // Ajustare pentru bloc
-        if (blockType === 'bloc') {
-            effectiveZoneCoef -= 0.10;
-            blockAdjustment = -0.10;
+        if (pfMethod === 'evaluare') {
+            // PF cu raport evaluare ANEVAR
+            const valueEval = parseFloat(document.getElementById('buildingValueEval').value) || 0;
+            const evalAge = document.getElementById('evalAge').value;
+            
+            taxableValue = valueEval;
+            
+            // Cotă impozit PF cu evaluare
+            if (evalAge === '5y') {
+                rate = 0.02; // Penalizare evaluare mai veche de 5 ani
+            } else if (evalAge === '3y') {
+                rate = buildingType === 'residential' ? 0.0015 : 0.008;
+            } else {
+                rate = buildingType === 'residential' ? 0.001 : 0.005;
+            }
+            
+            // Update display pentru evaluare
+            document.getElementById('calcArea').textContent = 'din evaluare';
+            document.getElementById('calcBaseValue').textContent = 'ANEVAR';
+            document.getElementById('calcZoneCoef').textContent = '-';
+            document.getElementById('calcAgeReduction').textContent = '-';
+            document.getElementById('calcBlockAdj').textContent = '-';
+            
+        } else {
+            // PF - calcul automat din suprafață și caracteristici
+            const areaType = document.getElementById('areaType').value;
+            let inputArea = parseFloat(document.getElementById('buildingArea').value) || 0;
+            
+            // Conversie suprafață utilă → SCD (×1,40)
+            if (areaType === 'utila') {
+                area = inputArea * 1.40;
+                document.getElementById('scdConversion').classList.remove('hidden');
+                document.getElementById('scdValue').textContent = area.toFixed(2);
+            } else {
+                area = inputArea;
+                document.getElementById('scdConversion').classList.add('hidden');
+            }
+            
+            const material = document.getElementById('buildingMaterial').value;
+            const utilities = document.getElementById('buildingUtilities').value;
+            const buildingYear = parseInt(document.getElementById('buildingYear').value) || 2020;
+            const blockType = document.getElementById('buildingBlockType').value;
+            
+            // Valoare de bază pe mp
+            baseValuePerSqm = buildingBaseValues[utilities][material];
+            
+            // Coeficient zonă
+            let effectiveZoneCoef = zoneCoef;
+            
+            // NOTĂ: Brașov NU aplică reducerea -0.10 pentru bloc (conform validării cu date reale 2025)
+            // Ajustarea bloc este păstrată doar pentru informare, dar nu se aplică
+            let blockAdjustment = 0;  // Dezactivat pentru Brașov
+            
+            // Calcul vechime
+            const age = 2026 - buildingYear;
+            if (age > 100) {
+                ageReduction = 0.50;
+            } else if (age > 50) {
+                ageReduction = 0.30;
+            } else if (age > 30) {
+                ageReduction = 0.10;
+            }
+            
+            // Valoare impozabilă = Suprafață × Valoare/mp × Coef.zonă × (1 - reducere vechime)
+            taxableValue = area * baseValuePerSqm * effectiveZoneCoef * (1 - ageReduction);
+            
+            // Cotă impozit PF
+            rate = buildingType === 'residential' ? 0.001 : 0.005;
+            
+            // Update display
+            const areaLabel = areaType === 'utila' ? `${inputArea} mp (utilă) → ${area.toFixed(0)} mp SCD` : `${area.toLocaleString('ro-RO')} mp SCD`;
+            document.getElementById('calcArea').textContent = areaLabel;
+            document.getElementById('calcBaseValue').textContent = baseValuePerSqm.toLocaleString('ro-RO') + ' lei/mp';
+            document.getElementById('calcZoneCoef').textContent = '×' + effectiveZoneCoef.toFixed(2);
+            document.getElementById('calcAgeReduction').textContent = '-' + (ageReduction * 100) + '%';
+            document.getElementById('calcBlockAdj').textContent = 'N/A (Brașov)';
         }
-        
-        // Calcul vechime
-        const age = 2026 - buildingYear;
-        if (age > 100) {
-            ageReduction = 0.50;
-        } else if (age > 50) {
-            ageReduction = 0.30;
-        } else if (age > 30) {
-            ageReduction = 0.10;
-        }
-        
-        // Valoare impozabilă = Suprafață × Valoare/mp × Coef.zonă × (1 - reducere vechime)
-        taxableValue = area * baseValuePerSqm * effectiveZoneCoef * (1 - ageReduction);
-        
-        // Cotă impozit PF
-        rate = buildingType === 'residential' ? 0.001 : 0.005;
-        
-        // Update display
-        document.getElementById('calcArea').textContent = area.toLocaleString('ro-RO') + ' mp';
-        document.getElementById('calcBaseValue').textContent = baseValuePerSqm.toLocaleString('ro-RO') + ' lei/mp';
-        document.getElementById('calcZoneCoef').textContent = '×' + effectiveZoneCoef.toFixed(2);
-        document.getElementById('calcAgeReduction').textContent = '-' + (ageReduction * 100) + '%';
-        document.getElementById('calcBlockAdj').textContent = blockAdjustment.toFixed(2);
         
     } else {
         // PJ - valoare din contabilitate
