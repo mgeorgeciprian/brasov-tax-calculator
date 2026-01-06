@@ -117,6 +117,17 @@
                         </div>
 
                         <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">🚐 Autoutilitare N1 (≤3,5 tone)</h4>
+                            <ul class="space-y-2 text-sm">
+                                <li><strong>Ce sunt:</strong> Vehicule pentru transport marfă cu masa totală ≤3,5t</li>
+                                <li><strong>Exemple:</strong> Dacia Dokker, VW Caddy, Ford Transit Connect, Renault Kangoo</li>
+                                <li><strong>Cum se calculează:</strong> Pe capacitate cilindrică (la fel ca autoturismele)</li>
+                                <li><strong>Unde găsesc categoria:</strong> În talon la rubrica "Categorie vehicul" scrie "N1"</li>
+                                <li>→ Selectează "Autoutilitară N1" și introdu capacitatea din talon</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-gray-50 rounded-lg p-4">
                             <h4 class="font-semibold text-gray-800 mb-2">🌿 Norma de poluare</h4>
                             <ul class="space-y-2 text-sm">
                                 <li><strong>Non-Euro / Euro 1-2</strong> - mașini vechi (înainte de 2000)</li>
@@ -149,6 +160,129 @@
                                 <li><strong>Intravilan arabil</strong> - teren în oraș fără construcții</li>
                                 <li><strong>Extravilan</strong> - teren agricol în afara orașului</li>
                             </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exemple de calcul -->
+                <div>
+                    <h3 class="font-bold text-lg text-gray-800 mb-3 flex items-center gap-2">🧮 Exemple de Calcul</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <!-- Exemplu 1: Apartament bloc -->
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                            <h4 class="font-semibold text-blue-800 mb-2">🏢 Apartament în bloc</h4>
+                            <div class="text-sm space-y-1">
+                                <p>Suprafață utilă: <strong>105 mp</strong></p>
+                                <p>SCD: 105 × 1,40 = <strong>147 mp</strong></p>
+                                <p>Material: Beton (<strong>2.677 lei/mp</strong>)</p>
+                                <p>Zona B: <strong>×2,50</strong></p>
+                                <p>Vechime >50 ani: <strong>-30%</strong></p>
+                                <div class="border-t border-blue-300 mt-2 pt-2">
+                                    <p>Valoare: 147 × 2.677 × 2,50 × 0,70 = <strong>688.658 lei</strong></p>
+                                    <p class="font-bold text-blue-900">Impozit: 688,66 lei/an</p>
+                                    <p class="text-green-700">Cu bonificație: 619,79 lei/an</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exemplu 2: Casa din lemn -->
+                        <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                            <h4 class="font-semibold text-amber-800 mb-2">🏡 Casă din lemn</h4>
+                            <div class="text-sm space-y-1">
+                                <p>Suprafață utilă: <strong>80 mp</strong></p>
+                                <p>SCD: 80 × 1,40 = <strong>112 mp</strong></p>
+                                <p>Material: Lemn (<strong>335 lei/mp</strong>)</p>
+                                <p>Zona C: <strong>×2,40</strong></p>
+                                <p>Vechime 20 ani: <strong>fără reducere</strong></p>
+                                <div class="border-t border-amber-300 mt-2 pt-2">
+                                    <p>Valoare: 112 × 335 × 2,40 = <strong>90.048 lei</strong></p>
+                                    <p class="font-bold text-amber-900">Impozit: 90,05 lei/an</p>
+                                    <p class="text-green-700">Cu bonificație: 81,04 lei/an</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exemplu 3: Cu evaluare ANEVAR -->
+                        <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                            <h4 class="font-semibold text-purple-800 mb-2">📋 Cu raport evaluare ANEVAR</h4>
+                            <div class="text-sm space-y-1">
+                                <p>Valoare din evaluare: <strong>450.000 lei</strong></p>
+                                <p>Evaluare recentă: <strong>cotă 0,1%</strong></p>
+                                <div class="border-t border-purple-300 mt-2 pt-2">
+                                    <p>Calcul: 450.000 × 0,1%</p>
+                                    <p class="font-bold text-purple-900">Impozit: 450 lei/an</p>
+                                    <p class="text-green-700">Cu bonificație: 405 lei/an</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exemplu 4: Autoturism -->
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                            <h4 class="font-semibold text-gray-800 mb-2">🚗 Autoturism</h4>
+                            <div class="text-sm space-y-1">
+                                <p>Capacitate: <strong>1.598 cmc</strong></p>
+                                <p>Normă poluare: <strong>Euro 5</strong></p>
+                                <p>Tarif: <strong>9,47 lei/200 cmc</strong></p>
+                                <div class="border-t border-gray-300 mt-2 pt-2">
+                                    <p>Fracțiuni: ⌈1598÷200⌉ = <strong>8</strong></p>
+                                    <p>Bază: 8 × 9,47 = 75,76 lei</p>
+                                    <p>+ Euro 5 (+75%): 75,76 × 1,75</p>
+                                    <p class="font-bold text-gray-900">Impozit: 132,58 lei/an</p>
+                                    <p class="text-green-700">Cu bonificație: 119,32 lei/an</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Exemplu 5: Autoutilitara N1 -->
+                        <div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                            <h4 class="font-semibold text-orange-800 mb-2">🚐 Autoutilitară N1</h4>
+                            <div class="text-sm space-y-1">
+                                <p>Model: <strong>VW Caddy</strong></p>
+                                <p>Capacitate: <strong>1.968 cmc</strong></p>
+                                <p>Normă poluare: <strong>Euro 6</strong></p>
+                                <p>Tarif: <strong>18,97 lei/200 cmc</strong></p>
+                                <div class="border-t border-orange-300 mt-2 pt-2">
+                                    <p>Fracțiuni: ⌈1968÷200⌉ = <strong>10</strong></p>
+                                    <p>Bază: 10 × 18,97 = 189,70 lei</p>
+                                    <p>+ Euro 6 (+35%): 189,70 × 1,35</p>
+                                    <p class="font-bold text-orange-900">Impozit: 256,10 lei/an</p>
+                                    <p class="text-green-700">Cu bonificație: 230,49 lei/an</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tabel valori de baza materiale -->
+                    <div class="mt-4 bg-gray-50 rounded-lg p-4">
+                        <h4 class="font-semibold text-gray-800 mb-3">📊 Valori de bază 2026 pe tip material (lei/mp)</h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm">
+                                <thead>
+                                    <tr class="border-b border-gray-300">
+                                        <th class="text-left py-2">Material</th>
+                                        <th class="text-right py-2">Cu instalații</th>
+                                        <th class="text-right py-2">Fără instalații</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b border-gray-200">
+                                        <td class="py-2">Beton armat / Cărămidă arsă</td>
+                                        <td class="text-right font-medium">2.677 lei</td>
+                                        <td class="text-right">1.606 lei</td>
+                                    </tr>
+                                    <tr class="border-b border-gray-200">
+                                        <td class="py-2">Cărămidă nearsă / Chirpici</td>
+                                        <td class="text-right font-medium">803 lei</td>
+                                        <td class="text-right">535 lei</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2">Lemn / Alte materiale</td>
+                                        <td class="text-right font-medium">335 lei</td>
+                                        <td class="text-right">201 lei</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -412,15 +546,49 @@
                         <select id="vehicleType" onchange="onVehicleTypeChange()" class="w-full p-3 border border-gray-300 rounded-lg">
                             <option value="autoturism">Autoturism (M1)</option>
                             <option value="motocicleta">Motocicletă / Moped / ATV</option>
-                            <option value="autoutilitara">Autoutilitară (&lt;12t)</option>
+                            <option value="autoutilitara_n1">Autoutilitară N1 (≤3,5t) - pe capacitate</option>
+                            <option value="autoutilitara_12t">Autoutilitară N2/N3 (&lt;12t) - pe capacitate</option>
+                            <option value="camion_12t">Camion ≥12t - pe masă/axe</option>
                             <option value="autorulota_m1">Autorulotă (M1)</option>
                             <option value="rulota_tractata">Rulotă tractată / Remorcă</option>
                         </select>
+                        <p id="vehicleTypeNote" class="text-xs text-blue-600 mt-1"></p>
                     </div>
                     <div id="engineCapacityDiv">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Capacitate cilindrică (cm³) <span class="text-red-500">*</span></label>
                         <input type="number" id="engineCapacity" oninput="calculateVehicle()" placeholder="Din talon - rubrica P.1" class="w-full p-3 border border-gray-300 rounded-lg">
                         <p class="text-xs text-gray-500 mt-1">Rubrica P.1 din certificatul de înmatriculare</p>
+                    </div>
+                </div>
+
+                <!-- Secțiune pentru camioane >=12t -->
+                <div id="truckSection" class="hidden">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Număr axe</label>
+                            <select id="truckAxles" onchange="calculateVehicle()" class="w-full p-3 border border-gray-300 rounded-lg">
+                                <option value="2">2 axe</option>
+                                <option value="3">3 axe</option>
+                                <option value="4">4+ axe</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Sistem suspensie</label>
+                            <select id="truckSuspension" onchange="calculateVehicle()" class="w-full p-3 border border-gray-300 rounded-lg">
+                                <option value="aer">Suspensie pneumatică (aer)</option>
+                                <option value="arc">Suspensie pe arcuri</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Masa totală maximă autorizată</label>
+                        <select id="truckMass" onchange="calculateVehicle()" class="w-full p-3 border border-gray-300 rounded-lg">
+                            <option value="12_13">12 - 13 tone</option>
+                            <option value="13_14">13 - 14 tone</option>
+                            <option value="14_15">14 - 15 tone</option>
+                            <option value="15_18">15 - 18 tone</option>
+                            <option value="18_plus">Peste 18 tone</option>
+                        </select>
                     </div>
                 </div>
 
@@ -1703,15 +1871,30 @@ function onVehicleTypeChange() {
     const engineDiv = document.getElementById('engineCapacityDiv');
     const pollutionDiv = document.getElementById('pollutionDiv');
     const trailerSection = document.getElementById('trailerSection');
+    const truckSection = document.getElementById('truckSection');
+    const noteEl = document.getElementById('vehicleTypeNote');
+    
+    // Reset all sections
+    engineDiv.classList.remove('hidden');
+    pollutionDiv.classList.remove('hidden');
+    trailerSection.classList.add('hidden');
+    truckSection.classList.add('hidden');
+    noteEl.textContent = '';
     
     if (vehicleType === 'rulota_tractata') {
         engineDiv.classList.add('hidden');
         pollutionDiv.classList.add('hidden');
         trailerSection.classList.remove('hidden');
-    } else {
-        engineDiv.classList.remove('hidden');
-        pollutionDiv.classList.remove('hidden');
-        trailerSection.classList.add('hidden');
+    } else if (vehicleType === 'camion_12t') {
+        engineDiv.classList.add('hidden');
+        pollutionDiv.classList.add('hidden');
+        truckSection.classList.remove('hidden');
+    } else if (vehicleType === 'autoutilitara_n1') {
+        noteEl.textContent = '📋 N1 = transport marfă ≤3,5t (Dacia Dokker, VW Caddy, Ford Transit Connect etc.)';
+    } else if (vehicleType === 'autoutilitara_12t') {
+        noteEl.textContent = '📋 N2/N3 sub 12t = autoutilitare mai mari (Sprinter, Iveco Daily etc.)';
+    } else if (vehicleType === 'autorulota_m1') {
+        pollutionDiv.classList.add('hidden');
     }
     calculateVehicle();
 }
@@ -1727,8 +1910,8 @@ function calculateVehicle() {
     let tariffPerUnit = 0;
     let units = 0;
     
-    // Electric = scutit
-    if (pollutionNorm === 'electric') {
+    // Electric = scutit (doar pentru vehicule care au normă poluare)
+    if (pollutionNorm === 'electric' && vehicleType !== 'rulota_tractata' && vehicleType !== 'camion_12t') {
         document.getElementById('calcCapacity').textContent = engineCapacity + ' cm³';
         document.getElementById('calcUnits').textContent = '-';
         document.getElementById('calcTariff').textContent = '-';
@@ -1759,9 +1942,36 @@ function calculateVehicle() {
         document.getElementById('calcBaseTax').textContent = baseTax.toFixed(2) + ' RON';
         document.getElementById('calcPollution').textContent = '+0%';
     }
+    else if (vehicleType === 'camion_12t') {
+        // Camioane >= 12t - pe masă și axe
+        const axles = document.getElementById('truckAxles').value;
+        const suspension = document.getElementById('truckSuspension').value;
+        const mass = document.getElementById('truckMass').value;
+        
+        // Tarife pentru camioane >= 12t (valori orientative Brașov 2026)
+        const truckRates = {
+            '2': { aer: { '12_13': 0, '13_14': 148, '14_15': 415, '15_18': 591, '18_plus': 591 },
+                   arc: { '12_13': 163, '13_14': 359, '14_15': 509, '15_18': 1152, '18_plus': 1152 }},
+            '3': { aer: { '12_13': 148, '13_14': 256, '14_15': 399, '15_18': 629, '18_plus': 870 },
+                   arc: { '12_13': 206, '13_14': 357, '14_15': 554, '15_18': 872, '18_plus': 1269 }},
+            '4': { aer: { '12_13': 399, '13_14': 406, '14_15': 629, '15_18': 986, '18_plus': 1269 },
+                   arc: { '12_13': 406, '13_14': 631, '14_15': 988, '15_18': 1486, '18_plus': 1486 }}
+        };
+        
+        baseTax = truckRates[axles]?.[suspension]?.[mass] || 500;
+        
+        document.getElementById('calcCapacity').textContent = axles + ' axe, ' + (suspension === 'aer' ? 'pneumatic' : 'arc');
+        document.getElementById('calcUnits').textContent = '-';
+        document.getElementById('calcTariff').textContent = 'pe masă/axe';
+        document.getElementById('calcBaseTax').textContent = baseTax.toFixed(2) + ' RON';
+        document.getElementById('calcPollution').textContent = '+0%';
+    }
     else {
-        // Tarife per fracțiune 200 cm³
-        const brackets = [
+        // Autoturisme, motociclete, autoutilitare N1, N2/N3 sub 12t
+        // Toate se calculează pe capacitate cilindrică
+        
+        // Tarife per fracțiune 200 cm³ pentru AUTOTURISME (M1)
+        const autoturismBrackets = [
             { max: 1600, rate: 9.47 },
             { max: 2000, rate: 18.97 },
             { max: 2600, rate: 37.96 },
@@ -1769,12 +1979,36 @@ function calculateVehicle() {
             { max: Infinity, rate: 94.88 }
         ];
         
+        // Tarife pentru AUTOUTILITARE N1/N2/N3 sub 12t (tarif unic conform Art. 470)
+        const autoutilitaraBrackets = [
+            { max: 1600, rate: 9.47 },
+            { max: 2000, rate: 18.97 },
+            { max: 2600, rate: 37.96 },
+            { max: 3000, rate: 75.92 },
+            { max: Infinity, rate: 94.88 }
+        ];
+        
+        // Tarife pentru MOTOCICLETE
+        const motoBrackets = [
+            { max: 500, rate: 9.47 },
+            { max: Infinity, rate: 18.97 }
+        ];
+        
+        let brackets;
+        if (vehicleType === 'motocicleta') {
+            brackets = motoBrackets;
+        } else if (vehicleType === 'autoutilitara_n1' || vehicleType === 'autoutilitara_12t') {
+            brackets = autoutilitaraBrackets;
+        } else {
+            brackets = autoturismBrackets;
+        }
+        
         const bracket = brackets.find(b => engineCapacity <= b.max);
         tariffPerUnit = bracket ? bracket.rate : 94.88;
         units = Math.ceil(engineCapacity / 200);
         baseTax = units * tariffPerUnit;
         
-        // Suprataxe poluare Brașov
+        // Suprataxe poluare Brașov (se aplică pentru toate vehiculele cu motor)
         const pollutionSurcharges = {
             noneuro: 1.00, euro3: 1.00, euro4: 1.00,
             euro5: 0.75, euro6: 0.35, hybrid: 0.05
